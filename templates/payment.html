@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Payment{% endblock %}
+{% block content %}
+
+<!-- payment.html -->
+<h1>Show me the money!</h1>
+<!-- writes out the form tag automatically -->
+{{ form.render }}
+	
+{% endblock %}
