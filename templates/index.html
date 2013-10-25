@@ -1,0 +1,156 @@
+<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Red Carpet</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/docs.css" />
+    <script src="js/custom.modernizr.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="font/stylesheet.css">
+
+</head>
+<body class="fondo  antialiased off-canvas hide-extras">
+    
+
+<!-- Navigation -->
+<div class="top-nav">
+<nav class="top-bar row">
+    <div class="large-12 columns">
+    
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#" class="logo">
+            <img src="img/logo.png">
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>       
+    
+    <div class="search"><input type="text"></div>
+
+    <section class="top-bar-section">
+        
+      <!-- Right Nav Section -->
+      <ul class="right">
+
+        <li><a href="#">ESMALTADO PERMANENTE LED</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">STARTER KID</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">PRO KIT</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">NAIL ART KITS</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">ACCESORIOS</a></li>
+
+
+            <li class="divider">&bull;</li>
+
+        <li class="has-dropdown">
+          <a href="#">CÓMO APLICAR</a>
+          <ul class="dropdown">
+            <li><a href="#">Aplicaión</a></li>
+            <li><a href="#">Videos</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            
+          </ul>
+        </li>
+
+
+        
+
+
+      </ul>
+    </section>
+
+    </div>
+</nav>
+</div>
+<!-- End Top Bar -->
+
+<!-- End Navigation -->
+
+
+    
+<div class="footer gun">
+    <div class="content">
+        <img src="img/mark1.png" class="mark1">
+        <footer class="row">
+
+            
+
+            <div class="large-5 small-12 columns">
+                <p>Copyright&copy; 2013 Besign All Rights Reserved </p>
+            </div>
+
+            <div class="large-4 small-7 columns">
+                <p>  Contact: Cookie Policy   T&Cs    FAQ </p>
+            </div>
+
+            <div class="large-1 show-for-large-up columns">
+                <p>Follow us </p>
+            </div>
+
+            <div class="large-2 small-5 columns">
+                <ul class="social">
+                    <li><a href="#" class="twitter"></a></li>
+                    <li><a href="#" class="facebook"></a></li>
+                    <li><a href="#" class="pinterest"></a></li>
+                </ul>
+            </div>
+
+
+
+
+        </footer>
+    </div>
+</div>
+
+        
+    
+
+<script>
+
+      document.write('<script src="http://foundation.zurb.com/docs/assets/vendor/'
+        + ('__proto__' in {} ? 'zepto' : 'jquery')
+        + '.js"><\/script>');
+    </script>
+<script src="js/docs.js"></script>
+<script>
+      $(document).foundation();
+      
+
+      $.ajax({
+        url: '//zurb.com/jobs/widgets/jobs.json?limit=3',
+        dataType: 'jsonp',
+        success: function(data) {
+          var list = $("<ul></ul>");
+          $.each(data.jobs, function(idx, job) {
+            var item = "<li><a href='"+job.url+"' target='_blank'>" +
+              "<span class='positionTitle'>"+job.title+"</span>" +
+              "<span class='location'><span class='companyName'>"+job.company_name+"</span> in "+job.location+"</span>" +
+              "</a>" +
+              "</li>";
+            list.append(item);
+          });
+            // Customize This
+          $("#zurbJobsWidget").html(list);
+        }
+      });
+
+      // For Kitchen Sink Page
+      $('#start-jr').on('click', function() {
+        $(document).foundation('joyride','start');
+      });
+      
+    </script>
+  </body>
+</html>

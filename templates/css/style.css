@@ -1,0 +1,161 @@
+html, body {
+	width:100%;
+	height: 100%;
+}
+
+body.fondo {
+	background: url(../images/background.jpg) no-repeat center center;
+	background-position: fixed;
+	background-size: cover;
+}
+
+.orbit-bullets {
+	display:none;
+}
+
+.top-nav {
+	background: #3b3b3a;
+}
+
+.top-bar {
+	background:#3b3b3a;
+}
+
+
+.footer {
+	background: url(../img/foot.jpg) repeat-y center center;
+	background-size: cover;
+	padding-top: 0em;
+	
+	border-top:3px solid #575756;
+
+}
+
+.footer.gun {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+}
+
+.footer .content {
+	position: relative;
+}
+
+
+
+.footer p {
+	padding-top: 1em;
+	font-size: 0.8em;
+	color:#EEE;
+}
+
+
+.footer .social {
+	list-style: none;
+	padding-top: 0.5em;
+}
+
+.footer .social li {
+	float: left; margin-right: 3px;
+}
+
+.footer .social li a {
+	display: block;
+	width:32px;
+	height: 32px;
+	background: red;
+}
+
+.footer .social li a.twitter {
+	background:  url(../img/tw.png) no-repeat center center !important;
+	background-size: 24px !important;
+}
+
+.footer .social li a.facebook {
+	background:  url(../img/fb.png) no-repeat center center !important;
+	background-size: 24px !important;
+}
+
+.footer .social li a.pinterest {
+	background:  url(../img/pin.png) no-repeat center center !important;
+	background-size: 24px !important;
+}
+
+.debug .columns {
+	background: red;
+}
+
+
+
+@media only screen and (max-width: 939px) {
+	
+	/* Mobiles */
+
+	.top-bar .logo img {
+		padding-top: 0px;
+		height: 45px;
+	}
+
+	.footer .mark1 {
+		position: absolute;
+		top:-130px;
+		width:500px;
+	}
+
+
+
+}
+
+@media only screen and (min-width: 940px) {
+	
+	/* Desktop */
+
+	.top-bar {
+		height: 90px;
+	}
+
+	.top-bar .logo img {
+		padding-top: 12px;
+	}
+
+	.top-bar .name {
+		height: 90px;
+	}
+
+	.top-bar .logo img {
+		padding-top: 12px;
+	}
+
+	.top-bar-section {
+		top: -50px;
+	}
+	
+	.top-bar-section ul li {
+		font-size:14px;
+		font-family: "asapregular", "Lucida grande", "Arial", sans-serif;
+	}
+	
+	
+	.footer .mark1 {
+		position: absolute;
+		top:-210px;
+		width:800px;
+	}
+	
+	.header {
+		position: relative;
+	}
+	
+	.search {
+		float: right;
+		width: 200px; 
+	}
+
+	.search input, .search input:focus {
+		background:#FFF url("../img/lupa.png") no-repeat 170px 2px;
+		border:none;
+		border-radius: 25px;
+	}
+
+}
