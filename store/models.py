@@ -77,7 +77,7 @@ class Categoria(models.Model):
 
 class Colores(models.Model):
     color = models.CharField(blank=False,max_length=150)
-    imagen = models.ImageField(upload_to='uploads/images/%Y/%m/%d',blank=True,null=True)
+    imagen = models.FileField(upload_to='uploads/images/%Y/%m/%d',blank=True,null=True)
     class Meta:
         verbose_name_plural = "Colores"
     def __unicode__(self):

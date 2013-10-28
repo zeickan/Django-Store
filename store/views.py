@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.translation import ugettext
 from django.conf import settings
+from store.models import *
 
 SITE_URL = settings.SITE_URL
 
@@ -11,13 +12,24 @@ from paypal.standard.forms import PayPalPaymentsForm
 
 
 def principal(request):
-    template = "contenido.html"
-    data = {'time' : 'hola'}    
+    categorias = Categoria.objects.all()
+    productos = Producto.objects.all()
+    template = "prueba.html"
+    data = {'categorias' : categorias, "productos":productos }
     return render_to_response(template, context_instance=RequestContext(request,data))
+
+"""
+    menu = clase.objects.all()
+    galeria = Elemento.objects.filter(mostrar = True)
+    template = "galeria.html"
+    data = {'galeria' : galeria, "menu" : menu}
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+"""
     
 
 def basket(request):
-     # What you want the button to do.
+     # What you want the button to do.  
     paypal_dict = {
         "business": "paypal-facilitator@zeickan.com",
         "amount": "0.00",
