@@ -11,8 +11,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_store',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev_red',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'dev',
         'PASSWORD': 'qwe8521z_dev',
@@ -36,7 +36,7 @@ TIME_ZONE = 'America/Chicago'
 #LANGUAGE_CODE = 'en-US'
 LANGUAGE_CODE = 'es-MX'
 
-SITE_URL = 'http://127.0.0.1:8000'
+SITE_URL = 'http://py.androsromo.com'
 
 SITE_ID = 1
 
@@ -53,7 +53,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/'
+MEDIA_ROOT = '/srv/www/django/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -64,11 +64,11 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/srv/www/django/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = 'http://py.androsromo.com/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -112,11 +112,26 @@ ROOT_URLCONF = 'django_bootstrapping.urls'
 WSGI_APPLICATION = 'django_bootstrapping.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Applications/XAMPP/htdocs/Py/Store/templates/',
+    #'/Applications/XAMPP/htdocs/Py/Store/templates/',
+    '/srv/www/django/templates/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # default context processors for Django 1.4
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    # context processors for 'myproject'
+    "store.context_processors.baseurl",
+)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
