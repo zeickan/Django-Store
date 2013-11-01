@@ -1,22 +1,138 @@
-{% load staticfiles %}<!DOCTYPE html> 
-<html lang="{{ LANGUAGE_CODE|default:"es-mx" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
-	<meta charset="UTF-8">
-	<title>{% block title %}{% endblock %}</title>
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="screen">
-	<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+{% load staticfiles %}<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Red Carpet{% endblock %}</title>
+	
+	<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
+	
+    <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
+    <link rel="stylesheet" href="{% static "css/docs.css" %}" />
+    <script src="{% static "js/custom.modernizr.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "font/stylesheet.css" %}">
+		
 
 </head>
 {% load i18n %}
-<body>
-	
+<body class="{% block indexClass%}{% endblock%}antialiased off-canvas hide-extras">
 
+
+<!-- Navigation -->
+<div class="top-nav">
+<nav class="top-bar row">
+    <div class="large-12 columns">
+
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#" class="logo">
+            <img src="{% static "img/logo.png" %}">
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+
+    <div class="search"><input type="text"></div>
+
+    <section class="top-bar-section">
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+
+        <li><a href="#">ESMALTADO PERMANENTE LED</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">STARTER KID</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">PRO KIT</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">NAIL ART KITS</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="#">ACCESORIOS</a></li>
+
+
+            <li class="divider">&bull;</li>
+
+        <li class="has-dropdown">
+          <a href="#">CÓMO APLICAR</a>
+          <ul class="dropdown">
+            <li><a href="#">Aplicaión</a></li>
+            <li><a href="#">Videos</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+
+          </ul>
+        </li>
+
+
+
+
+
+      </ul>
+    </section>
+
+    </div>
+</nav>
+</div>
+<!-- End Top Bar -->
+
+<!-- End Navigation -->
+
+
+<div class="whiteBlock">
 {% block content %}{% endblock %}
+</div>
 
 
-</body>
+<div class="footer {% block indexFoot %}{% endblock %}">
+    {% block footIndex %}{% endblock %}
+        <footer class="row">
 
+
+
+            <div class="large-5 small-12 columns">
+                <p>Copyright&copy; 2013 Besign All Rights Reserved </p>
+            </div>
+
+            <div class="large-4 small-7 columns">
+                <p>  Contact: Cookie Policy   T&Cs    FAQ </p>
+            </div>
+
+            <div class="large-1 show-for-large-up columns">
+                <p>Follow us </p>
+            </div>
+
+            <div class="large-2 small-5 columns">
+                <ul class="social">
+                    <li><a href="#" class="twitter"></a></li>
+                    <li><a href="#" class="facebook"></a></li>
+                    <li><a href="#" class="pinterest"></a></li>
+                </ul>
+            </div>
+
+
+
+        </footer>
+    {% block indexDiv %}{% endblock %}
+</div>
+
+
+
+
+<script>
+
+	document.write('<script src="{{ BASE_URL }}/static/js/vendor/'
+	  + ('__proto__' in {} ? 'zepto' : 'jquery')
+	  + '.js"><\/script>');
+	
+	var jsonPath = "{{ BASE_URL }}/api/";
+</script>
+<script src="{% static "js/docs.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+  </body>
 </html>

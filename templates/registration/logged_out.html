@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Salir{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/accounts/login/">Cuentas</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-12 columns">
+          <div class="row">
+
+            <div class="large-12 columns">
+                
+               <h3>Sesión cerrada</h3>
+               
+               <h6>La sessión se cerro con éxito, para volver a entrar <a href="{{ BASE_URL }}/accounts/login/">Haz click aqui</a></h6>
+               
+            </div>
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

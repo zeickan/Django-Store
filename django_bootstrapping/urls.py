@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import login, logout
+
 
 
 
@@ -13,6 +15,24 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'store.views.principal', name='home'),
+
+    # Store
+    url(r'^store/$', 'store.views.getProducts', name='store_getProducts'),
+    url(r'^store/checkout/$', 'store.views.basket', name='checkout'),
+    url(r'^store/(?P<categoria>\w{0,50})/$', 'store.views.getProducts', name='store_getProducts'),
+    
+    
+    # API STORE    
+    url(r'^api/addItem$', 'store.api.setBasket', name='api_additem'),
+    url(r'^api/delItem$', 'store.api.delBasket', name='api_delitem'),
+    
+    
+    # AUTH
+    
+    (r'^accounts/login/$',  login),
+    (r'^accounts/logout/$', logout),
+    url(r'^accounts/profile/$', 'store.views.profile', name='user_profile'),
+    url(r'^accounts/register/$', 'store.views.register', name='user_register'),
     
     url(r'^basket/$', 'store.views.basket', name='basket'),
 

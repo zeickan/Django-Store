@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Identificarme{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/accounts/login/">Cuentas</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-12 columns">
+          <div class="row">
+
+            <div class="large-6 columns">
+                
+                {% if form.errors %}
+                    <p class="error">Lo siento, el nombre de usuario y clave no son válidos</p>
+                  {% endif %}
+                
+                  <form action='.' method='post'>
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" name="username" value="" id="username">
+                    <label for="password">Clave:</label>
+                    <input type="password" name="password" value="" id="password">
+                
+                    <input type="submit" value="login" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    {% csrf_token %}
+                  </form>
+                
+            </div>
+            
+            <div class="large-6 columns">
+                ¿Eres nuevo? Registrate
+            </div>
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -3,6 +3,10 @@ html, body {
 	height: 100%;
 }
 
+body {
+	background: #383836;
+}
+
 body.fondo {
 	background: url(../images/background.jpg) no-repeat center center;
 	background-position: fixed;
@@ -21,6 +25,9 @@ body.fondo {
 	background:#3b3b3a;
 }
 
+.whiteBlock {
+	background: white;
+}
 
 .footer {
 	background: url(../img/foot.jpg) repeat-y center center;
@@ -87,6 +94,54 @@ body.fondo {
 }
 
 
+.colores {
+	padding-bottom: 20px;
+}
+
+.colores img {
+	width:54px;
+}
+
+
+.producto .basket {
+	border:2px solid #dadada;
+	border-radius: 10px;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.producto .basket .preview {
+	height: 200px;
+}
+
+.producto .basket  {
+	position: relative;
+}
+
+.producto .basket .car {
+	position: absolute;
+	right: 0px;
+	display: block;
+	width:48px;
+	padding: 5px;
+	background: #dadada;
+	border-radius: 6px;
+}
+
+.producto h5 {
+	color:#878787;
+	font-family: 'Nobile', sans-serif;
+	font-weight: 900;
+	font-size: 1em;
+}
+
+.producto h6 {
+	color:#878787;
+	font-family: 'Nobile', sans-serif;
+	font-weight: 100;
+	font-size: 0.8em;
+}
+
 
 @media only screen and (max-width: 939px) {
 	
@@ -136,6 +191,9 @@ body.fondo {
 		font-family: "asapregular", "Lucida grande", "Arial", sans-serif;
 	}
 	
+	.contenido {
+		padding-bottom: 3em;	
+	}
 	
 	.footer .mark1 {
 		position: absolute;

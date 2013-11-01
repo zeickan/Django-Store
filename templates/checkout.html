@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Caja{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+  <!-- Side Bar -->
+
+        <div class="large-4 columns">
+
+            
+            <div class="panel">
+                <p>
+                    Nombre: {{user}}
+                </p>
+            
+                
+                <br><br>
+                {{basket}}
+            </div>
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-8 columns">
+          <div class="row">
+
+            {{dev}}
+
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

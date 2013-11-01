@@ -91,6 +91,8 @@ class Producto(models.Model):
     colores = models.ManyToManyField(Colores,blank=True,null=True)
     #ventaja = HTMLField(blank=True,null=True)
     #ficha = models.TextField(blank=True,null=True)
+    precio = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2)
+
     def __unicode__(self):
         return "%s" % self.nombre
 

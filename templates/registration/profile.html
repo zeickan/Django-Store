@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Perfil{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/accounts/login/">Cuentas</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-12 columns">
+          <div class="row">
+
+            <div class="large-3  columns">
+                
+                <div class="panel radius">
+                    <p>Sidebar de opciones</p>
+                    
+                    <ul>
+                        <li><a href="{{ BASE_URL }}/accounts/logout/">Logout</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div class="large-9 columns">
+                
+                Formulario de cmabio
+                
+            </div>
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Productos{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+  <!-- Side Bar -->
+
+        <div class="large-4 columns">
+
+            <div class="hide-for-small">
+                <div class="colores">
+                    {% for item  in colores %}
+                        <a href="#" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+
+          <img src="{% static "img/temporada.png" %}">
+            
+            <div class="panel">
+                <p>
+                    Productos en el carrito: <span id="current_basket">{{current_basket}}</span>
+                </p>
+                
+                <p>
+                    <a href="{{ BASE_URL }}/store/checkout/" class="medium expand button round">Pasar a pagar</a>
+                </p>
+            
+                
+                <br><br>
+                {{basket}}
+            </div>
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-8 columns">
+          <div class="row">
+
+          {% for items in productos %}
+
+                <div class="large-4 small-6 producto columns">
+                    <div class="basket">
+                        <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
+                        <img src="/media/{{items.imagen}}" class="preview">
+          
+                        <div>
+                          <h5>{{items.nombre}}</h5>
+                          <h6 class="subheader">{{items.precio}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+          {% endfor %}
+
+
+
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
