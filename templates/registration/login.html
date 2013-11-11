@@ -17,36 +17,72 @@
         
         
 
-
-    <!-- Thumbnails -->
-
         <div class="large-12 columns">
-          <div class="row">
+            <div class="row formula">
 
-            <div class="large-6 columns">
-                
-                {% if form.errors %}
-                    <p class="error">Lo siento, el nombre de usuario y clave no son válidos</p>
-                  {% endif %}
-                
-                  <form action='.' method='post'>
-                    <label for="username">Nombre de usuario:</label>
-                    <input type="text" name="username" value="" id="username">
-                    <label for="password">Clave:</label>
-                    <input type="password" name="password" value="" id="password">
-                
-                    <input type="submit" value="login" />
-                    <input type="hidden" name="next" value="{{ next }}" />
-                    {% csrf_token %}
-                  </form>
-                
-            </div>
-            
-            <div class="large-6 columns">
-                ¿Eres nuevo? Registrate
-            </div>
+                {% if next == '/accounts/profile/registerSuccess' %}
 
-          </div>
+                <div class="large-12 columns">
+                    <div class="success">
+                        <h3>Felicidades, ya estas registrado.</h3>
+                        <p>Inicia sesión y empieza a disfrutar de los productos Red Carpet.</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="large-6 columns">
+
+                    <div class="row separadorDerecho">
+                        <div class="large-2 columns">&nbsp;</div>
+                        <div class="large-8 columns ">
+                            
+                            <h2>Iniciar sesión</h2>
+
+                            <p>Si ya estas registrado, identificate con tu nombre de usuario.</p>
+
+                            {% if form.errors %}
+                                <p class="error">Lo siento, el nombre de usuario y clave no son válidos</p>
+                            {% endif %}
+                            
+                              <form action='.' method='post'>
+                                
+                                <input type="text" name="username" value="" placeholder="Username" class="texto" id="username">
+                                
+                                <input type="password" name="password" class="texto" placeholder="Password" value="" id="password">
+                            
+                                <input type="submit" value="Iniciar sesión" class="boton" />
+                                <input type="hidden" name="next" value="{{ next }}" />
+                                {% csrf_token %}
+                              </form>
+
+                        </div>
+                        <div class="large-1 columns"></div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="large-6 columns">
+
+                    <div class="row separadorIzquierdo">
+                        <div class="large-2 columns">&nbsp;</div>
+                        <div class="large-8 columns "> 
+
+                            <h2>Registrate</h2>
+
+                            <p>¿Eres nuevo? <br> Crea una cuenta en nuestra tienda, recordaremos tus datos de forma segura para que puedas comprar mas rapido, darle seguimiento a tus compras y aprovechar promociones exclusimas y mucho más.</p>
+
+                            <a href="{{BASE_URL}}/accounts/register/" class="boton">Registrate</a>
+                            
+
+                        </div>
+                        <div class="large-1 columns"></div>
+                    </div>
+
+
+                </div>
+
+            </div>
 
     <!-- End Thumbnails -->
 

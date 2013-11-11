@@ -42,6 +42,7 @@ admin.site.register(Subcategoria,SubcategoriaAdmin)
 admin.site.register(Colores)
 admin.site.register(Producto)
 
+
 class PedidoAdmin(admin.ModelAdmin):
     list_display = ('comprador','paid')
 

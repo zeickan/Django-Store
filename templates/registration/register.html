@@ -21,18 +21,48 @@
     <!-- Thumbnails -->
 
         <div class="large-12 columns">
-          <div class="row">
+          <div class="row formula">
 
-           
+            <div class="large-2 columns">&nbsp;</div>
             
-            <div class="large-12 columns">
+            <div class="large-8 columns">
+
                 
-                <p class="panel">
-                    
-                    
-                </p>
-                
+                 <h1>Crear cuenta</h1>
+
+                <form action="/accounts/register/" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <p class="fieldWrapper">
+                            
+                            {{ field.errors }}
+                            
+                            {{ field.label_tag }} 
+                            
+                            {% if field.html_name == 'password1' %}
+                                <input type="password" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% elif  field.html_name == 'password2' %}
+                                <input type="password" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% else %}
+                                <input type="text" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% endif %}
+
+
+
+                            {{ field.help_text }}
+
+                        </p>
+                    {% endfor %}
+
+                    <input type="submit" class="boton" value="Crear cuenta">
+                </form>
+
+
+
             </div>
+
+            <div class="large-2 columns">&nbsp;</div>
 
           </div>
 

@@ -13,45 +13,145 @@
           {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
         </ul>
 
-      <div class="row">
+      <div class="row cart">
         
         
+        
+        <div class="large-8 columns">
+            <div class="row">
 
-  <!-- Side Bar -->
+                <div class="large-12 columns">
+
+                    <table class="nicetable">
+                        
+                        <thead>
+                            <tr>
+                                <th colspan="2">PRODUCTO</th>
+                                <th>COLOR</th>
+                                <th>CANTIDAD</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td width="20%" align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
+                                <td width="45%">Description</td>
+                                <td width="10%">Rosa</td>
+                                <td width="15%"><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
+                                <td width="10%">$9.99</td>
+                            </tr>
+
+                            <tr>
+                                <td align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
+                                <td>Description</td>
+                                <td>Rosa</td>
+                                <td><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
+                                <td>$9.99</td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
+                                <td>Description</td>
+                                <td>Rosa</td>
+                                <td><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
+                                <td>$9.99</td>
+                            </tr>
+
+
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td>PROMO CODE</td>
+                                <td colspan="4"><input type="text" value="" placeholder="Coupon"></td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+
+                    <div class="bloque">
+                        <span class="right">$9.99</span>
+                        SUBTOTAL 
+                    </div>
+                    
+                    <div class="bloque">
+                        <span class="right">$199.00</span>
+                        ENVIO ESTANDAR POR DHL 
+                    </div>
+
+                    <div class="total">
+                        <span class="right">$9.99</span>
+                        TOTAL:
+                    </div>
+
+
+
+                    
+
+                    {{ form.rendera }}
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!-- Side Bar -->
 
         <div class="large-4 columns">
 
             
-            <div class="panel">
-                <p>
-                    Nombre: {{user}}
-                </p>
+            <div class="sidebar">
+                <h3>Detalles del pedido</h3>
+
+                <p>Dirección de facturacion</p>
+
+                <ul>
+                    <li>{{user.first_name}} {{user.last_name}}</li>
+                    <li>{{user.profile.calle}}</li>
+                    <li>{{user.profile.direccion}} </li>
+                    <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                </ul>
             
-                
-                <br><br>
-                {{basket}}
+                <p>Dirección de envio</p>
+
+                <ul>
+                    <li>{{user.first_name}} {{user.last_name}}</li>
+                    <li>{{user.profile.calle}}</li>
+                    <li>{{user.profile.direccion}} </li>
+                    <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                </ul>
+
+                <p>Metodo de envio</p>
+
+                <ul>
+                    <li>Envio nacional - DHL Standard </li>
+                </ul>
+
+                <p>Información de pago</p>
+
+                <ul>
+                    <li>Paypal</li>
+                </ul>
+
+                {% for items in lista %}
+
+                    {{items.nombre}}
+
+                {% endfor %}
             </div>
 
         </div>
 
-    <!-- End Side Bar -->
+        <!-- End Side Bar -->
 
 
-    <!-- Thumbnails -->
-
-        <div class="large-8 columns">
-          <div class="row">
-
-            {{dev}}
 
 
-          </div>
 
-    <!-- End Thumbnails -->
-
-
-  
-          </div>
         </div>
       </div>
 

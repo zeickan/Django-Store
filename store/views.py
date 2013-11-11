@@ -5,12 +5,11 @@ from django.template.context import RequestContext
 from django.utils.translation import ugettext
 from django.conf import settings
 from store.models import *
-from django.http import HttpResponse, HttpRequest, QueryDict
+from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedirect
+from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
-
-import pprint
-
+from forms import ExtendedUserCreationForm
 
 SITE_URL = settings.SITE_URL
 
@@ -54,7 +53,7 @@ def getProducts(request,categoria=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
-
+import re
 
 def basket(request):
      # What you want the button to do.
@@ -74,18 +73,40 @@ def basket(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     
     if request.user.is_authenticated():
-        dev = 'Soy usuario'
-        usua = request.user.username
-    else:
-        dev = 'No soy nadie'
-        usua = 'Anonymous'
-    
-    
-    context = {"form": form,
-               "user": usua,
-               "dev" : dev
+
+        try:
+            basket = request.session['basket']
+        except KeyError:
+            basket = []
+
+        cesta = []
+        for row in basket:
+            cesta.append( re.sub("([^0-9]+)", "", row) )
+
+        # productos en la cesta
+        productos = Producto.objects.filter(id__in=cesta)
+
+        user = request.user
+        profile = user.profile
+
+        dev = 'dev'
+
+        context = {"form": form,
+               "user": user,
+               "lista": productos,
+               'profile': profile,
+               "dev" : dev,
+               'form':form
             }
-    return render_to_response("checkout.html", context)
+
+        return render_to_response("checkout.html", context)
+
+    else:
+
+        return HttpResponseRedirect("/accounts/login/")
+    
+    
+
 
 
 def ipn(request):
@@ -95,19 +116,32 @@ def ipn(request):
     return render_to_response("empty", context)
 
 
-@login_required
-def profile(request):
-    
-    context = {"hello": "hola mundo"}
 
-    return render_to_response("registration/profile.html", context)
+"""
+USERS OPTIONS
+"""
+
+
+from django.shortcuts import render
 
 
 def register(request):
-    
-    context = {"hello": "hola mundo"}
 
-    return render_to_response("registration/register.html", context)
+    if request.user.is_authenticated():
+
+        return HttpResponseRedirect("/accounts/profile/")
+
+    else:
+
+        if request.method == 'POST':
+            form = ExtendedUserCreationForm(request.POST)
+            if form.is_valid():
+                new_user = form.save()
+                return HttpResponseRedirect("/accounts/profile/registerSuccess")
+        else:
+            form = ExtendedUserCreationForm()
+
+        return render(request, "registration/register.html", { 'form': form, })
 
 
 

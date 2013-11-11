@@ -3,6 +3,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from tinymce.models import HTMLField
+from django.contrib.auth.models import User
 import os
 from django.core.exceptions import ValidationError
 
@@ -103,6 +104,9 @@ class Pedido(models.Model):
 
     def __unicode__(self):
         return "%s" % self.comprador
+
+
+
 
 #### PAYPAL PAYMENTS
 

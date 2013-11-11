@@ -31,8 +31,12 @@ urlpatterns = patterns('',
     
     (r'^accounts/login/$',  login),
     (r'^accounts/logout/$', logout),
-    url(r'^accounts/profile/$', 'store.views.profile', name='user_profile'),
+
+    #url(r'^accounts/profile/$', 'userprofile.views.userprofile', name='user_profile'),
+    (r'^accounts/',include('userprofile.urls')),
     url(r'^accounts/register/$', 'store.views.register', name='user_register'),
+    #url(r'^accounts/login/registerSuccess$','userprofile.views.registersuccess'),
+
     
     url(r'^basket/$', 'store.views.basket', name='basket'),
 
