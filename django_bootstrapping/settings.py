@@ -76,7 +76,8 @@ STATIC_URL = 'http://127.0.0.1:8000/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/Applications/XAMPP/htdocs/Py/Store/static/',
+    #'/Applications/XAMPP/htdocs/Py/Store/static/',
+    #'/Users/imac1/Developer/Django-Store/static/'
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -118,7 +119,7 @@ WSGI_APPLICATION = 'django_bootstrapping.wsgi.application'
 TEMPLATE_DIRS = (
     #'/Applications/XAMPP/htdocs/Py/Store/templates/',
     #'/srv/www/django/templates/',
-    '/Applications/XAMPP/htdocs/Py/Store/templates/'
+    '/Users/imac1/Developer/Django-Store/templates/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
