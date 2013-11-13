@@ -55,7 +55,7 @@ def getProducts(request,categoria=False):
 
 import re
 
-def basket(request):
+def basket(request,step = False):
      # What you want the button to do.
     paypal_dict = {
         "business": "paypal-facilitator@zeickan.com",

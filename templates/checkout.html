@@ -21,6 +21,8 @@
             <div class="row">
 
                 <div class="large-12 columns">
+                    
+                    
 
                     <table class="nicetable">
                         
@@ -34,31 +36,22 @@
                         </thead>
 
                         <tbody>
+                            {%for items in lista %}
                             <tr>
-                                <td width="20%" align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
-                                <td width="45%">Description</td>
-                                <td width="10%">Rosa</td>
+                                <td width="20%" align="center">
+                                    {% if items.imagen == '' %}
+                                        <img src="{{ BASE_URL}}/static/img/noimage.jpg" width="50">
+                                    {% else %}
+                                        <img src="/media/{{items.imagen}}" width="50">
+                                    {% endif %}
+                                </td>
+                                <td width="45%">{{items.nombre}}</td>
+                                <td width="10%">{% for item in items.colores.all %}xD{% endfor %}</td>
                                 <td width="15%"><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
-                                <td width="10%">$9.99</td>
+                                <td width="10%">${{items.precio}}</td>
                             </tr>
-
-                            <tr>
-                                <td align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
-                                <td>Description</td>
-                                <td>Rosa</td>
-                                <td><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
-                                <td>$9.99</td>
-                            </tr>
+                            {% endfor %}
                             
-                            <tr>
-                                <td align="center"><img src="/media/documents/2013/10/27/smallThumb_rcm_afterpartyplayful.png" width="50"></td>
-                                <td>Description</td>
-                                <td>Rosa</td>
-                                <td><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
-                                <td>$9.99</td>
-                            </tr>
-
-
                         </tbody>
 
                         <tfoot>
@@ -85,7 +78,7 @@
                         TOTAL:
                     </div>
 
-
+                    
 
                     
 
