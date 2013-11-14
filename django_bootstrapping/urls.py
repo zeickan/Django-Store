@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^store/$', 'store.views.getProducts', name='store_getProducts'),
     url(r'^store/checkout/$', 'store.views.basket', name='checkout'),
 	url(r'^store/checkout/(?P<step>\w{0,50})/$', 'store.views.basket', name='checkout_stepone'),
-    url(r'^store/(?P<categoria>\w{0,50})/$', 'store.views.getProducts', name='store_getProducts'),
+    url(r'^store/(?P<slug>[-\w]+)/$', 'store.views.getProducts', name='store_getProducts'),
     
     
     # API STORE    

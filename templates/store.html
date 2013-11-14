@@ -43,6 +43,8 @@
                 
                 <br><br>
                 {{basket}}
+                <hr>
+                {{dev}}
             </div>
 
         </div>
@@ -60,7 +62,12 @@
                 <div class="large-4 small-6 producto columns">
                     <div class="basket">
                         <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
-                        <img src="/media/{{items.imagen}}" class="preview">
+
+                        {% if items.imagen == '' %}
+                            <img src="{{ BASE_URL}}/static/img/noimage.jpg" class="preview">
+                        {% else %}
+                            <img src="{{ BASE_URL}}/media/{{items.imagen}}" class="preview">
+                        {% endif %}
           
                         <div>
                           <h5>{{items.nombre}}</h5>

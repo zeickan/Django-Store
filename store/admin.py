@@ -18,6 +18,7 @@ class CategoriaForm(forms.ModelForm):
 """
 
 class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ('nombre','slug')
     prepopulated_fields = {"slug": ("nombre",)}
     search_fields = ('nombre',)
 admin.site.register(Categoria,CategoriaAdmin)
@@ -40,7 +41,12 @@ admin.site.register(Subcategoria,SubcategoriaAdmin)
 
 
 admin.site.register(Colores)
-admin.site.register(Producto)
+
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('nombre','categoria','dig_colores')
+    list_filter = ('categoria',)
+
+admin.site.register(Producto,ProductoAdmin)
 
 
 class PedidoAdmin(admin.ModelAdmin):

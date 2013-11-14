@@ -27,14 +27,29 @@ def principal(request):
 
 
 
-def getProducts(request,categoria=False):
+def getProducts(request,slug=False):
     
     if request.method == "GET":
         dev = request.GET.get('add')
-    
-    showCategoria = categoria
-    
-    productos = Producto.objects.all()
+
+    showCategoria = slug
+
+    if slug:
+
+        categoria = Categoria.objects.get(slug=slug)
+        id_cat = categoria.id
+        productos = Producto.objects.filter(categoria=id_cat)
+
+        dev = categoria.id
+    else:
+        productos = Producto.objects.all()
+
+        dev = 'none'
+
+
+
+
+
     colores = Colores.objects.all()
     try:
         basket = request.session['basket']

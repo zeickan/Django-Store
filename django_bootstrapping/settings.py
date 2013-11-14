@@ -55,7 +55,8 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 #MEDIA_ROOT = '/srv/www/django/media/'
-MEDIA_ROOT = '/Users/imac1/Developer/Store/media/'
+#MEDIA_ROOT = '/Users/imac1/Developer/Store/media/'
+MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -76,9 +77,10 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    #'/Applications/XAMPP/htdocs/Py/Store/static/',
+    '/Applications/XAMPP/htdocs/Py/Store/static/',
+
     #'/Users/imac1/Developer/Django-Store/static/'
-    '/Users/imac1/Developer/Store/static/',
+    #'/Users/imac1/Developer/Store/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -118,9 +120,9 @@ ROOT_URLCONF = 'django_bootstrapping.urls'
 WSGI_APPLICATION = 'django_bootstrapping.wsgi.application'
 
 TEMPLATE_DIRS = (
-    #'/Applications/XAMPP/htdocs/Py/Store/templates/',
+    '/Applications/XAMPP/htdocs/Py/Store/templates/',
     #'/srv/www/django/templates/',
-    '/Users/imac1/Developer/Store/templates/'
+    #'/Users/imac1/Developer/Store/templates/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

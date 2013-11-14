@@ -79,6 +79,7 @@ class Categoria(models.Model):
 class Colores(models.Model):
     color = models.CharField(blank=False,max_length=150)
     imagen = models.FileField(upload_to='uploads/images/%Y/%m/%d',blank=True,null=True)
+    temporada = models.BooleanField(default=True,blank=True,help_text="Marcar si el color es de temporada")
     class Meta:
         verbose_name_plural = "Colores"
     def __unicode__(self):
@@ -99,6 +100,9 @@ class Producto(models.Model):
 
     def __unicode__(self):
         return "%s" % self.nombre
+
+    def dig_colores(self):
+        return ', '.join([obj.color for obj in self.colores.all()])
 
 class Pedido(models.Model):
     comprador = models.CharField(blank=False,max_length=150)
