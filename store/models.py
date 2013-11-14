@@ -94,6 +94,9 @@ class Producto(models.Model):
     #ficha = models.TextField(blank=True,null=True)
     precio = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2)
 
+    def get_colors(self):
+        return self.colores_set.all()
+
     def __unicode__(self):
         return "%s" % self.nombre
 

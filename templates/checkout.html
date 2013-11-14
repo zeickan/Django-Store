@@ -46,7 +46,7 @@
                                     {% endif %}
                                 </td>
                                 <td width="45%">{{items.nombre}}</td>
-                                <td width="10%">{% for item in items.colores.all %}xD{% endfor %}</td>
+                                <td width="10%">{% for obj in items.colores.all %} {{obj.color}} </li>{% endfor %}</td>
                                 <td width="15%"><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
                                 <td width="10%">${{items.precio}}</td>
                             </tr>
