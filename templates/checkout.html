@@ -29,7 +29,7 @@
                             <tr>
                                 <th colspan="2">PRODUCTO</th>
                                 <th>COLOR</th>
-                                <th>CANTIDAD</th>
+                                <th>ELIMINAR</th>
                                 <th>TOTAL</th>
                             </tr>
                         </thead>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td width="45%">{{items.nombre}}</td>
                                 <td width="10%">{% for obj in items.colores.all %} {{obj.color}} </li>{% endfor %}</td>
-                                <td width="15%"><input type="text" class="mini" value="1"><a href="#" class="fa fa-trash-o"></a></td>
+                                <td width="15%"><!-- <input type="text" class="mini" value="1">--><a href="{{ BASE_URL }}/api/delItem?id={{ items.id }}" class="fa fa-trash-o"></a></td>
                                 <td width="10%">${{items.precio}}</td>
                             </tr>
                             {% endfor %}
@@ -71,7 +71,7 @@
                             <tr>
                                 <td>Entregar a:</td>
                                 <td>
-                                    <input type="text" name="" value="" placeholder="{{ user.first_name }}">
+                                    <input type="text" name="" value="" placeholder="{{ user.first_name }} {{ user.last_name }}">
                                 <p style="clear:both;">
                                     <small>Dejalo en blanco para entregarlo a tu nombre.</small>
                                 </td>
@@ -235,7 +235,7 @@
                         <tbody>
 
                             <tr>
-                                <td><input type="radio" value="estandar" name="shipping_method" id="shipping"><label for="shipping">Metodo de envio estandar DHL - $9.99</label> </td>
+                                <td><input type="radio" value="estandar" name="shipping_method" id="shipping" checked="checked"><label for="shipping">Metodo de envio estandar DHL - $199.00</label> </td>
                             </tr>
                         </tbody>
 
@@ -247,7 +247,7 @@
                         <tbody>
 
                             <tr>
-                                <td><input type="radio" value="estandar" name="shipping_method" id="paypal"><label for="paypal">Paypal</label> </td>
+                                <td><input type="radio" value="estandar" name="payment_method" id="paypal"  checked="checked"><label for="paypal">Paypal</label> </td>
                             </tr>
                         </tbody>
 
@@ -255,7 +255,7 @@
 
 
                     <div class="bloque">
-                        <span class="right">$9.99</span>
+                        <span class="right">${{ subtotal }}</span>
                         SUBTOTAL 
                     </div>
                     
@@ -265,15 +265,13 @@
                     </div>
 
                     <div class="total">
-                        <span class="right">$9.99</span>
+                        <span class="right">${{ total }}</span>
                         TOTAL:
                     </div>
 
-                    
 
-                    
 
-                    {{ form.rendera }}
+                    {{ form.render }}
 
                 </div>
 
@@ -307,6 +305,7 @@
                     <li>{{user.profile.calle}}</li>
                     <li>{{user.profile.direccion}} </li>
                     <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                    {{dev}}
                 </ul>
 
                 <p>Metodo de envio</p>

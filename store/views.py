@@ -56,22 +56,10 @@ def getProducts(request,slug=False):
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
 
+from decimal import Decimal
+
+
 def basket(request,step = False):
-     # What you want the button to do.
-    paypal_dict = {
-        "business": "paypal-facilitator@zeickan.com",
-        "amount": "0.00",
-        "currency_code": "MXN",
-        "item_name": "Compra #1",
-        "invoice": "0001-32-0001",
-        "notify_url": SITE_URL+"/basket/request/ipn/notify/",
-        "return_url": SITE_URL+"/basket/return/",
-        "cancel_return": SITE_URL+"/basket/return/",
-
-    }
-
-    # Create the instance.
-    form = PayPalPaymentsForm(initial=paypal_dict)
     
     if request.user.is_authenticated():
 
@@ -87,18 +75,44 @@ def basket(request,step = False):
         # productos en la cesta
         productos = Producto.objects.filter(id__in=cesta)
 
+        sumar = []
+        for items in productos:
+            precio = Decimal(items.precio)
+            sumar.append(precio)
+
+
+        subtotal = sum(sumar)
+        total = subtotal+199
+
+        paypal_dict = {
+            "business": "paypal-facilitator@zeickan.com",
+            "amount": total,
+            "currency_code": "MXN",
+            "item_name": "Compra",
+            "invoice": "0001-32-0001",
+            "notify_url": SITE_URL+"/basket/request/ipn/notify/",
+            "return_url": SITE_URL+"/basket/return/",
+            "cancel_return": SITE_URL+"/basket/return/",
+        }
+
+        form = PayPalPaymentsForm(initial=paypal_dict)
+
+
         user = request.user
         profile = user.profile
 
-        dev = 'dev'
 
         data = {"form": form,
                "user": user,
                "lista": productos,
                'profile': profile,
-               "dev" : dev,
+               "subtotal" : subtotal,
+               "total": total,
                'form':form
             }
+
+
+
 
         return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 

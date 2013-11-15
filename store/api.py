@@ -2,7 +2,7 @@
 
 
 from store.models import *
-from django.http import HttpResponse, HttpRequest, QueryDict
+from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedirect
 import json
 
 
@@ -36,7 +36,7 @@ def delBasket(request):
             status = 'failed'
 
           
-        
+    """
     response_data = {}
     response_data['result'] = status
     response_data['message'] = msg
@@ -46,6 +46,8 @@ def delBasket(request):
     response = callback + '(' + response + ');'    
 
     return HttpResponse(response,content_type="application/json")
+    """
+    return HttpResponseRedirect("/store/checkout/")
 
 
 def setBasket(request):
