@@ -108,6 +108,7 @@ body.fondo {
 	border-radius: 10px;
 	text-align: center;
 	margin-bottom: 1em;
+	min-height: 340px;
 }
 
 .producto .basket .preview {
@@ -343,11 +344,14 @@ body.fondo {
 	border-radius: 5px;
 	background: #FFF;
 	font-size: 12px;
-	color:#CCC;
-	width:50px;
+	color:#CCC;	
 	box-shadow: none;
+}
+.nicetable tbody tr td input.mini {
+	width:50px;
 	float: left;
 }
+
 .nicetable .fa-trash-o {
 	float: left;
 	margin-left: 1em;
