@@ -26,26 +26,38 @@ def principal(request):
 def getProducts(request,slug=False):
     
     if request.method == "GET":
-        dev = request.GET.get('add')
+        q = request.GET.get('q')
+        dev = q
 
-    showCategoria = slug
+    if q:
 
-    if slug:
-        categoria = Categoria.objects.get(slug=slug)
-        id_cat = categoria.id
-        productos = Producto.objects.filter(categoria=id_cat)
-        dev = categoria.id
+        showCategoria = 'buscar'
+
+        productos = Producto.objects.filter(nombre__contains=q)
+
     else:
-        productos = Producto.objects.all()
-        dev = 'none'
 
-    colores = Colores.objects.all()
+        showCategoria = slug
+
+        if slug:
+            categoria = Categoria.objects.get(slug=slug)
+            id_cat = categoria.id
+            productos = Producto.objects.filter(categoria=id_cat)
+            dev = categoria.id
+        else:
+            productos = Producto.objects.all()
+            dev = 'none'
+
+
     try:
         basket = request.session['basket']
     except KeyError:
         basket = []
-        
+
     current = len(basket)
+
+    colores = Colores.objects.all()
+
     
     template = "store.html"
     data = {'colores' : colores,
@@ -55,6 +67,66 @@ def getProducts(request,slug=False):
             "actual": showCategoria,
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
+
+
+def getProduct(request,slug=False):
+
+    try:
+        basket = request.session['basket']
+    except KeyError:
+        basket = []
+
+    dev = ''
+
+    current = len(basket)
+
+    showCategoria = 'Producto'
+
+    productos = Producto.objects.filter(id=slug)
+
+    colores = Colores.objects.all()
+
+    template = "product.html"
+    data = {'colores' : colores,
+            "productos":productos,
+            "basket": basket,
+            "current_basket": current,
+            "actual": showCategoria,
+            "dev": dev }
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+
+
+def getProductByColor(request,slug=False):
+
+    try:
+        basket = request.session['basket']
+    except KeyError:
+        basket = []
+
+    dev = ''
+
+    current = len(basket)
+
+    showCategoria = 'Producto'
+
+
+    color =  Colores.objects.filter(id=slug)
+
+    productos = Producto.objects.filter(colores=slug)
+
+    colores = Colores.objects.all()
+
+    template = "product.html"
+    data = {'colores' : colores,
+            "productos":productos,
+            "basket": basket,
+            "current_basket": current,
+            "actual": showCategoria,
+            "dev": dev }
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+
 
 from decimal import Decimal
 
@@ -121,6 +193,24 @@ def basket(request,step = False):
         return HttpResponseRedirect("/accounts/login/")
     
     
+
+def seccion(request,slug = False):
+
+    if slug == "videos":
+        template = "videos.html"
+        data = {'dev':'dev',"actual": 'videos',}
+    elif slug == "faq":
+        template = "faq.html"
+        data = {'dev':'dev',"actual": 'FAQ',}
+    else:
+        template = "aplicar.html"
+        data = {'dev':'dev',"actual": 'Como aplicar',}
+
+
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+
+
 
 
 

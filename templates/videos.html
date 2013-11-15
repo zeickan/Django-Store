@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Productos{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/seccion/">Seccion</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+
+
+
+  <!-- Side Bar -->
+
+        <div class="large-12 columns">
+
+            <div class="nicetable">
+
+                <h1>Videos</h1>
+
+                <div><h2>Efecto de degradado</h2><br>
+<iframe src="http://www.youtube.com/embed/t5r8-VWciqs" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+<h2>Un toque de elegancia</h2><br>
+<iframe src="http://www.youtube.com/embed/BaQnit6NdjE" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+
+<h2>Tips &amp; Tricks Nail Art Kit</h2><br>
+<iframe src="http://www.youtube.com/embed/iYmVYdPJdGc" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+
+<h2>Manicura Francés Clásica</h2><br>
+<iframe src="http://www.youtube.com/embed/rqzfQjYFFLI" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+<h2>Shimmer &amp; Shine</h2><br>
+<iframe src="http://www.youtube.com/embed/2uAR1AErxYI" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+
+<h2>Glamorous Glimmer</h2><br>
+<iframe src="http://www.youtube.com/embed/zJQ0kAptSz8" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+<br><br>
+<h1>Y no olvides...</h1>
+<h2>Preparación de la uña<br></h2><br>
+<iframe src="http://www.youtube.com/embed/b1DHF6L5teI" allowfullscreen="" frameborder="0" height="315" width="560"></iframe>
+
+
+<h2>Proceso de Eliminación</h2><br>
+<iframe src="http://www.youtube.com/embed/rkS-X9pHA2M" allowfullscreen="" frameborder="0" height="315" width="560"></iframe></div>
+
+            </div>
+
+
+
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

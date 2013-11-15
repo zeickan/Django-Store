@@ -14,8 +14,8 @@
         </ul>
 
       <div class="row">
-        
-        
+
+
 
   <!-- Side Bar -->
 
@@ -30,20 +30,20 @@
                     <a href="{{ BASE_URL }}/store/checkout/" class="medium expand button round">Pasar a pagar</a>
                 </p>
 
-                
+                {{dev}}
 
             </div>
 
             <div class="hide-for-small">
                 <div class="colores">
                     {% for item  in colores %}
-                        <a href="#" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
+                        <a href="{{ BASE_URL }}/store/color/{{ item.id }}/" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
                     {% endfor %}
                 </div>
             </div>
 
             <img src="{% static "img/temporada.png" %}">
-            
+
 
 
         </div>
@@ -58,21 +58,23 @@
 
           {% for items in productos %}
 
-                <div class="large-4 small-6 producto columns">
-                    <div class="basket">
-                        <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
+                <div class="large-12  producto columns">
+                    <div class="basket pleft">
+
 
                         <a href="{{ BASE_URL}}/store/product/{{ items.id }}">
                         {% if items.imagen == '' %}
                             <img src="{{ BASE_URL}}/static/img/noimage.jpg" class="preview">
                         {% else %}
-                            <img src="{{ BASE_URL}}/media/{{items.imagen}}" class="preview">
+                            <img src="{{ BASE_URL}}/media/{{items.imagen}}">
                         {% endif %}
                         </a>
-          
+
                         <div>
-                          <h5><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h5>
-                          <h6 class="subheader">${{items.precio}}</h6>
+                          <h3><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h3>
+                          <p>{{ items.descripcion }}</p>
+                          <p>Colores: {% for obj in items.colores.all %} {{obj.color}} {% endfor %}</p>
+                          <h4>${{items.precio}}</h4>
                           <a href="#" rel="{{items.id}}" class="button round small">Agregar al carrito</a>
                         </div>
                     </div>
@@ -88,7 +90,7 @@
     <!-- End Thumbnails -->
 
 
-  
+
           </div>
         </div>
       </div>

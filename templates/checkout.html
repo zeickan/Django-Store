@@ -45,7 +45,7 @@
                                     {% endif %}
                                 </td>
                                 <td width="45%">{{items.nombre}}</td>
-                                <td width="10%">{% for obj in items.colores.all %} {{obj.color}} </li>{% endfor %}</td>
+                                <td width="10%">{% for obj in items.colores.all %} {{obj.color}} {% endfor %}</td>
                                 <td width="15%"><!-- <input type="text" class="mini" value="1">--><a href="{{ BASE_URL }}/api/delItem?id={{ items.id }}" class="fa fa-trash-o"></a></td>
                                 <td width="10%">${{items.precio}}</td>
                             </tr>
@@ -256,12 +256,12 @@
 
                     <div class="bloque">
                         <span class="right">${{ subtotal }}</span>
-                        SUBTOTAL 
+                        SUBTOTAL
                     </div>
-                    
+
                     <div class="bloque">
                         <span class="right">$199.00</span>
-                        ENVIO ESTANDAR POR DHL 
+                        ENVIO ESTANDAR POR DHL
                     </div>
 
                     <div class="total">

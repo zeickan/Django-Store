@@ -321,6 +321,27 @@ body.fondo {
 	color:#888;
 }
 
+.pleft {
+	text-align: left !important;
+	padding: 10px;
+}
+
+.faq {
+	color:#333;
+}
+
+.faq  h2 {
+	font-size: 1em !important;
+	color:#888;
+}
+
+.instructionsBox {
+	padding: 5em !important;
+}
+
+.instructionsBox ul {
+	list-style: none;
+}
 
 .nicetable {
 	background: white;

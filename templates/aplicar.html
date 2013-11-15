@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Productos{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/seccion/">Seccion</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+
+
+
+  <!-- Side Bar -->
+
+        <div class="large-12 columns">
+
+            <div class="nicetable">
+
+                <h1>Como aplicar</h1>
+
+                <div><h2>Cómo Funciona:</h2>
+            
+            <table class="instructionsBox">
+              <tbody><tr>
+                <td>
+                    <h3>Aplicación:</h3>
+                    
+                    <h3 class="steps">Paso 1 Preparación</h3>
+                    <img class="image" src="/static/images/steps/step-1-preparation.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Aplicar Prep MAX ADHESION SANITIZER para limpiar las uñas.</li>
+                      </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <h3 class="steps">Paso 2 Cuidado, Secado y Color</h3>
+                    <img class="image" src="/static/images/steps/step-2-care-and-color-a-portable.jpg">
+                    <div class="desc">
+                        <ul>
+                            <li>Aplicar una fina capa de <b>Structure </b>BASE COAT GEL en las cuatro uñas. Dejar el pulgar para el final.</li>
+                            <li>Secar en la lámpara<b> Portable Light</b> durante 1 minuto.</li>
+                        </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <img class="image" src="/static/images/steps/step-2-care-and-color-b-portable.jpg">
+                    <div class="desc">
+                        <ul>
+                            <li>Aplicar una fina capa de&nbsp;<b>RCM</b> COLOR.</li>
+                            <li>Curar durante 3 minutos (para tonos oscuros) y durante 2 minutos (para tonos claros) en la lámpara Portable Light.&nbsp;</li>
+                            <li>Aplicar una segunda capa siguiendo el mismo proceso.</li>
+                        </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <img class="image" src="/static/images/steps/step-2-care-and-color-c-portable.jpg">
+                    <div class="desc">
+                        <ul>
+                            <li>Aplicar una fina capa de&nbsp;<b>Brilliance</b> SEAL &amp; SHINE TOP COAT GEL</li>
+                            <li>Secar durante 2 minutos en lámpara&nbsp;<b>Portable Light</b>.</li>
+                        </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <h3 class="steps">Paso 3 Acabado</h3>
+                    <img class="image" src="/static/images/steps/step-3-finish-09.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Eliminar los residuos pegajosos con el limpiador&nbsp;<b>Purify</b> PRE &amp; POST APPLICATION CLEANSER.</li>
+                      </ul>
+                    </div>
+                </td>
+                <td>
+                    <h3>Eliminación:</h3>
+                    
+                    <h3 class="steps">Paso 1 Preparación</h3>
+                    <img class="image" src="/static/images/steps/step-1-preparation-removal.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Limar suavemente la superficie de la uña para romper el sello del esmaltado.</li>
+                      </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <h3 class="steps">Paso 2 Elimina</h3>
+                    <img class="image" src="/static/images/steps/step-2-remove-a.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Empapar un algodón con eliminador Erase GEL NAIL POLISH REMOVER.</li>
+                        <li>Colocarlo sobre la uña y envolverla en papel de aluminio.</li>
+                      </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <img class="image" src="/static/images/steps/step-2-remove-b.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Dejar envuelto durante 10 – 15 minutos.</li>
+                      </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <img class="image" src="/static/images/steps/step-2-remove-c.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Quitar el papel deslizando el algodón sobre la uña.</li>
+                        <li>Eliminar con cuidado los restos de color con un palito de naranjo.</li>
+                      </ul>
+                    </div>
+                    <br class="clearBoth">
+
+                    <h3 class="steps">Paso 3 Acabado</h3>
+                    <img class="image" src="/static/images/steps/step-3-finish.jpg">
+                    <div class="desc">
+                      <ul>
+                        <li>Masajear <b>Revitalize</b> NOURISHING CUTICLE OIL sobre la cutícula y la uña natural.</li>
+                      </ul>
+                    </div>
+                </td>
+              </tr>
+            </tbody></table>
+            <br>
+            <a class="downloadApplicationInstructions" target="_blank" href="/static/files/InstruccionesPortable.pdf">Descargar Instrucciones en PDF</a></div>
+
+
+
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

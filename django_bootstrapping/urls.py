@@ -21,7 +21,11 @@ urlpatterns = patterns('',
     url(r'^store/checkout/$', 'store.views.basket', name='checkout'),
 	url(r'^store/checkout/(?P<step>\w{0,50})/$', 'store.views.basket', name='checkout_stepone'),
     url(r'^store/(?P<slug>[-\w]+)/$', 'store.views.getProducts', name='store_getProducts'),
-    
+    url(r'^store/product/(?P<slug>[-\w]+)/$', 'store.views.getProduct', name='store_getProduct'),
+    url(r'^store/color/(?P<slug>[-\w]+)/$', 'store.views.getProductByColor', name='store_getProductByColor'),
+
+
+    url(r'^seccion/(?P<slug>[-\w]+)/$', 'store.views.seccion', name='seccion'),
     
     # API STORE    
     url(r'^api/addItem$', 'store.api.setBasket', name='api_additem'),
