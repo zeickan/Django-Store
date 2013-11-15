@@ -8,7 +8,7 @@
     <div class="large-12 columns">
 
         <ul class="breadcrumbs">
-          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/">Inicio</a></li>
           <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
           {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
         </ul>
@@ -21,7 +21,6 @@
             <div class="row">
 
                 <div class="large-12 columns">
-                    
                     
 
                     <table class="nicetable">
@@ -53,15 +52,207 @@
                             {% endfor %}
                             
                         </tbody>
-
+                        <!--
                         <tfoot>
                             <tr>
                                 <td>PROMO CODE</td>
                                 <td colspan="4"><input type="text" value="" placeholder="Coupon"></td>
                             </tr>
                         </tfoot>
+                        -->
 
                     </table>
+
+                    <table class="nicetable">
+                        <caption>Dirección de envio</caption>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Entregar a:</td>
+                                <td>
+                                    <input type="text" name="" value="" placeholder="{{ user.first_name }}">
+                                <p style="clear:both;">
+                                    <small>Dejalo en blanco para entregarlo a tu nombre.</small>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Calle y Número</td>
+                                <td><input type="text" name="" value="" placeholder="Calle #ext #int"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Colonia o Poblado</td>
+                                <td><input type="text" name="" value="" placeholder="Colonia"></td>
+                            </tr>
+
+                            <tr>
+                                <td>C.P</td>
+                                <td><input type="text" name="" value="" maxlength="5" size="5" placeholder=""></td>
+                            </tr>
+
+                            <tr>
+                                <td>Ciudad</td>
+                                <td><input type="text" name="" value="" placeholder="Ciudad"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Estado</td>
+                                <td><select name="state" id="state">
+                                        <option value="Aguascalientes">Aguascalientes</option>
+                                        <option value="Baja California">Baja California</option>
+                                        <option value="Baja California Sur">Baja California Sur</option>
+                                        <option value="Campeche">Campeche</option>
+                                        <option value="Chiapas">Chiapas</option>
+                                        <option value="Chihuahua">Chihuahua</option>
+                                        <option value="Coahuila">Coahuila</option>
+                                        <option value="Colima">Colima</option>
+                                        <option value="Distrito Federal">Distrito Federal</option>
+                                        <option value="Durango">Durango</option>
+                                        <option value="Estado de México">Estado de México</option>
+                                        <option value="Guanajuato">Guanajuato</option>
+                                        <option value="Guerrero">Guerrero</option>
+                                        <option value="Hidalgo">Hidalgo</option>
+                                        <option value="Jalisco">Jalisco</option>
+                                        <option value="Michoacán">Michoacán</option>
+                                        <option value="Morelos">Morelos</option>
+                                        <option value="Nayarit">Nayarit</option>
+                                        <option value="Nuevo León">Nuevo León</option>
+                                        <option value="Oaxaca">Oaxaca</option>
+                                        <option value="Puebla">Puebla</option>
+                                        <option value="Querétaro">Querétaro</option>
+                                        <option value="Quintana Roo">Quintana Roo</option>
+                                        <option value="San Luis Potosí">San Luis Potosí</option>
+                                        <option value="Sinaloa">Sinaloa</option>
+                                        <option value="Sonora">Sonora</option>
+                                        <option value="Tabasco">Tabasco</option>
+                                        <option value="Tamaulipas">Tamaulipas</option>
+                                        <option value="Tlaxcala">Tlaxcala</option>
+                                        <option value="Veracruz">Veracruz</option>
+                                        <option value="Yucatán">Yucatán</option>
+                                        <option value="Zacatecas">Zacatecas</option>
+                                    </select></td>
+                            </tr>
+
+
+
+                        </tbody>
+
+                    </table>
+
+                    <table class="nicetable">
+                        <caption>Dirección de facturación</caption>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Facturar a:</td>
+                                <td>
+                                    <input type="text" name="" value="" placeholder="{{ user.first_name }} {{ user.last_name }}">
+                                <p style="clear:both;">
+                                    <small>Dejalo en blanco para entregarlo a tu nombre.</small>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Correo electrónico:</td>
+                                <td>
+                                    <input type="text" name="" value="" placeholder="{{ user.email }}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Calle y Número</td>
+                                <td><input type="text" name="" value="" placeholder="Calle #ext #int"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Colonia o Poblado</td>
+                                <td><input type="text" name="" value="" placeholder="Colonia"></td>
+                            </tr>
+
+                            <tr>
+                                <td>C.P</td>
+                                <td><input type="text" name="" value="" maxlength="5" size="5" placeholder=""></td>
+                            </tr>
+
+                            <tr>
+                                <td>Ciudad</td>
+                                <td><input type="text" name="" value="" placeholder="Ciudad"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Estado</td>
+                                <td><select name="state" id="state">
+                                        <option value="Aguascalientes">Aguascalientes</option>
+                                        <option value="Baja California">Baja California</option>
+                                        <option value="Baja California Sur">Baja California Sur</option>
+                                        <option value="Campeche">Campeche</option>
+                                        <option value="Chiapas">Chiapas</option>
+                                        <option value="Chihuahua">Chihuahua</option>
+                                        <option value="Coahuila">Coahuila</option>
+                                        <option value="Colima">Colima</option>
+                                        <option value="Distrito Federal">Distrito Federal</option>
+                                        <option value="Durango">Durango</option>
+                                        <option value="Estado de México">Estado de México</option>
+                                        <option value="Guanajuato">Guanajuato</option>
+                                        <option value="Guerrero">Guerrero</option>
+                                        <option value="Hidalgo">Hidalgo</option>
+                                        <option value="Jalisco">Jalisco</option>
+                                        <option value="Michoacán">Michoacán</option>
+                                        <option value="Morelos">Morelos</option>
+                                        <option value="Nayarit">Nayarit</option>
+                                        <option value="Nuevo León">Nuevo León</option>
+                                        <option value="Oaxaca">Oaxaca</option>
+                                        <option value="Puebla">Puebla</option>
+                                        <option value="Querétaro">Querétaro</option>
+                                        <option value="Quintana Roo">Quintana Roo</option>
+                                        <option value="San Luis Potosí">San Luis Potosí</option>
+                                        <option value="Sinaloa">Sinaloa</option>
+                                        <option value="Sonora">Sonora</option>
+                                        <option value="Tabasco">Tabasco</option>
+                                        <option value="Tamaulipas">Tamaulipas</option>
+                                        <option value="Tlaxcala">Tlaxcala</option>
+                                        <option value="Veracruz">Veracruz</option>
+                                        <option value="Yucatán">Yucatán</option>
+                                        <option value="Zacatecas">Zacatecas</option>
+                                    </select></td>
+                            </tr>
+
+
+
+
+
+                        </tbody>
+
+                    </table>
+
+
+                    <table class="nicetable">
+                        <caption>Metodo de envio</caption>
+
+                        <tbody>
+
+                            <tr>
+                                <td><input type="radio" value="estandar" name="shipping_method" id="shipping"><label for="shipping">Metodo de envio estandar DHL - $9.99</label> </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <table class="nicetable">
+                        <caption>Metodo de pago</caption>
+
+                        <tbody>
+
+                            <tr>
+                                <td><input type="radio" value="estandar" name="shipping_method" id="paypal"><label for="paypal">Paypal</label> </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
 
                     <div class="bloque">
                         <span class="right">$9.99</span>
@@ -130,11 +321,7 @@
                     <li>Paypal</li>
                 </ul>
 
-                {% for items in lista %}
 
-                    {{items.nombre}}
-
-                {% endfor %}
             </div>
 
         </div>

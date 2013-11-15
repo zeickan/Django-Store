@@ -8,23 +8,19 @@ from store.models import *
 from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
-
 from forms import ExtendedUserCreationForm
+from paypal.standard.forms import PayPalPaymentsForm
+
+import re
 
 SITE_URL = settings.SITE_URL
 
-from paypal.standard.forms import PayPalPaymentsForm
-
-
-
-
 def principal(request):
-    categorias = Categoria.objects.all()
-    productos = Producto.objects.all()
+    #categorias = Categoria.objects.all()
+    #productos = Producto.objects.all()
     template = "main.html"
-    data = {'categorias' : categorias, "productos":productos }
+    data = { 'dev': 'Hello World', }
     return render_to_response(template, context_instance=RequestContext(request,data))
-
 
 
 def getProducts(request,slug=False):
@@ -35,20 +31,13 @@ def getProducts(request,slug=False):
     showCategoria = slug
 
     if slug:
-
         categoria = Categoria.objects.get(slug=slug)
         id_cat = categoria.id
         productos = Producto.objects.filter(categoria=id_cat)
-
         dev = categoria.id
     else:
         productos = Producto.objects.all()
-
         dev = 'none'
-
-
-
-
 
     colores = Colores.objects.all()
     try:
@@ -66,9 +55,6 @@ def getProducts(request,slug=False):
             "actual": showCategoria,
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
-
-
-import re
 
 def basket(request,step = False):
      # What you want the button to do.
@@ -106,7 +92,7 @@ def basket(request,step = False):
 
         dev = 'dev'
 
-        context = {"form": form,
+        data = {"form": form,
                "user": user,
                "lista": productos,
                'profile': profile,
@@ -114,7 +100,7 @@ def basket(request,step = False):
                'form':form
             }
 
-        return render_to_response("checkout.html", context)
+        return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 
     else:
 
