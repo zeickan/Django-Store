@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     # API STORE    
     url(r'^api/addItem$', 'store.api.setBasket', name='api_additem'),
     url(r'^api/delItem$', 'store.api.delBasket', name='api_delitem'),
+    url(r'^api/conekta$', 'store.api.conektaio', name='conekta_gateway'),
     
     
     # AUTH
