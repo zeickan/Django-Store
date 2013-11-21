@@ -3,7 +3,7 @@
 
 from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedirect
 import json
-import conekta
+#import conekta
 
 
 ### PETICIONES API PARA EL CARRITO

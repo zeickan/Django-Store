@@ -33,7 +33,7 @@ def getProducts(request,slug=False):
 
         showCategoria = 'buscar'
 
-        productos = Producto.objects.filter(nombre__contains=q)
+        productos = Producto.objects.filter(nombre__contains=q,stock=True)
 
     else:
 
@@ -42,10 +42,10 @@ def getProducts(request,slug=False):
         if slug:
             categoria = Categoria.objects.get(slug=slug)
             id_cat = categoria.id
-            productos = Producto.objects.filter(categoria=id_cat)
+            productos = Producto.objects.filter(categoria=id_cat,stock=True)
             dev = categoria.id
         else:
-            productos = Producto.objects.all()
+            productos = Producto.objects.filter(stock=True)
             dev = 'none'
 
 
@@ -56,7 +56,7 @@ def getProducts(request,slug=False):
 
     current = len(basket)
 
-    colores = Colores.objects.all()
+    colores = Colores.objects.filter(temporada=True)
 
     
     template = "store.html"
@@ -82,7 +82,7 @@ def getProduct(request,slug=False):
 
     showCategoria = 'Producto'
 
-    productos = Producto.objects.filter(id=slug)
+    productos = Producto.objects.filter(id=slug,stock=True)
 
     colores = Colores.objects.all()
 
@@ -115,7 +115,7 @@ def getProductByColor(request,slug=False):
 
     productos = Producto.objects.filter(colores=slug)
 
-    colores = Colores.objects.all()
+    colores = Colores.objects.filter(temporada=True)
 
     template = "product.html"
     data = {'colores' : colores,

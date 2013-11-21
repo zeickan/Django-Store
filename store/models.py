@@ -94,6 +94,7 @@ class Producto(models.Model):
     #ventaja = HTMLField(blank=True,null=True)
     #ficha = models.TextField(blank=True,null=True)
     precio = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2,default='0.00')
+    stock = models.BooleanField(blank=True,default=True,help_text='Desmarcar si no hay stock disponible')
 
     def get_colors(self):
         return self.colores_set.all()

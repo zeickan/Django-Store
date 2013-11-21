@@ -37,7 +37,7 @@
             <div class="hide-for-small">
                 <div class="colores">
                     {% for item  in colores %}
-                        <a href="#" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
+                        <a href="{{ BASE_URL }}/store/color/{{ item.id }}/" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
                     {% endfor %}
                 </div>
             </div>
