@@ -13,6 +13,19 @@ body.fondo {
 	background-size: cover;
 }
 
+.seccion  {
+	background: #CCC;
+	font-family: "source_sans_probold",helvetica,sans-serif;
+	margin-bottom: 2em;
+}
+
+.seccion h1 {
+	margin-top: -30px;
+	height: 50px;
+	color:#888;
+	font-size:2em;
+}
+
 .orbit-bullets {
 	display:none;
 }
@@ -143,6 +156,9 @@ body.fondo {
 	font-size: 0.8em;
 }
 
+.seccion {
+    back
+}
 
 /* FORMULA */
 

@@ -35,6 +35,8 @@ def getProducts(request,slug=False):
 
         productos = Producto.objects.filter(nombre__contains=q,stock=True)
 
+        categoryName = 'Buscador'
+
     else:
 
         showCategoria = slug
@@ -44,9 +46,11 @@ def getProducts(request,slug=False):
             id_cat = categoria.id
             productos = Producto.objects.filter(categoria=id_cat,stock=True)
             dev = categoria.id
+            categoryName = categoria.nombre
         else:
             productos = Producto.objects.filter(stock=True)
             dev = 'none'
+            categoryName = 'Todos los productos'
 
 
     try:
@@ -65,6 +69,7 @@ def getProducts(request,slug=False):
             "basket": basket,
             "current_basket": current,
             "actual": showCategoria,
+            "current": categoryName,
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
 
@@ -92,6 +97,7 @@ def getProduct(request,slug=False):
             "basket": basket,
             "current_basket": current,
             "actual": showCategoria,
+            "current": productos,
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
 
