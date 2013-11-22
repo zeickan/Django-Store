@@ -127,6 +127,7 @@ def getProductByColor(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+from store.forms import *
 
 from decimal import Decimal
 
@@ -173,6 +174,15 @@ def basket(request,step = False):
         user = request.user
         profile = user.profile
 
+        if request.method == 'POST':
+            formula = PedidoForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+        else:
+            formula = PedidoForm()
+
+
 
         data = {"form": form,
                "user": user,
@@ -180,7 +190,7 @@ def basket(request,step = False):
                'profile': profile,
                "subtotal" : subtotal,
                "total": total,
-               'form':form
+               "formula": formula
             }
 
 
