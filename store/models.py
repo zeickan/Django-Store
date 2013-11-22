@@ -94,6 +94,7 @@ class Producto(models.Model):
     #ventaja = HTMLField(blank=True,null=True)
     #ficha = models.TextField(blank=True,null=True)
     precio = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2,default='0.00')
+    stock = models.BooleanField(blank=True,default=True,help_text='Desmarcar si no hay stock disponible')
 
     def get_colors(self):
         return self.colores_set.all()
@@ -108,6 +109,27 @@ class Pedido(models.Model):
     comprador = models.CharField(blank=False,max_length=150)
     productos = models.ManyToManyField(Producto,blank=True,null=True)
     paid = models.BooleanField(blank=False,default=False)
+    custom = models.CharField(blank=True,null=True,max_length=150)
+    coupon = models.CharField(blank=True,null=True,max_length=50)
+    subtotal = models.CharField(blank=True,null=True,max_length=50)
+    envio = models.CharField(blank=True,null=True,max_length=50)
+    total = models.CharField(blank=True,null=True,max_length=50)
+    fac_nombre = models.CharField(blank=True,null=True,max_length=200)
+    fac_calle = models.CharField(blank=True,null=True,max_length=250)
+    fac_colonia = models.CharField(blank=True,null=True,max_length=250)
+    fac_cp = models.CharField(blank=True,null=True,max_length=5)
+    fac_ciudad = models.CharField(blank=True,null=True,max_length=100)
+    fac_estado = models.CharField(blank=True,null=True,max_length=100)
+    fac_pais = models.CharField(blank=True,null=True,max_length=100)
+    fac_telefono = models.CharField(blank=True,null=True,max_length=50)
+    envio_nombre = models.CharField(blank=True,null=True,max_length=250)
+    envio_calle = models.CharField(blank=True,null=True,max_length=250)
+    envio_colonia = models.CharField(blank=True,null=True,max_length=250)
+    envio_cp = models.CharField(blank=True,null=True,max_length=5)
+    envio_ciudad = models.CharField(blank=True,null=True,max_length=100)
+    envio_estado = models.CharField(blank=True,null=True,max_length=100)
+    envio_pais = models.CharField(blank=True,null=True,max_length=100)
+    envio_telefono = models.CharField(blank=True,null=True,max_length=50)
 
     def __unicode__(self):
         return "%s" % self.comprador

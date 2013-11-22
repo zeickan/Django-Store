@@ -1,8 +1,26 @@
+# -*- encoding: utf-8 -*-
+
 import re
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
- 
+from store.models import *
+from django.forms import Textarea
+
+
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['fac_nombre', 'fac_calle', 'fac_colonia', 'fac_cp','fac_ciudad','fac_estado','fac_pais','fac_telefono']
+        labels = {
+            'fac_nombre': ('Nombre de facturación'),
+        }
+        widgets = {
+            'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
+
+
+
 class UniqueUserEmailField(forms.EmailField):
     """
     An EmailField which only is valid if no User has that email.
