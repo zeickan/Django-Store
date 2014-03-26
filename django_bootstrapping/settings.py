@@ -54,9 +54,11 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
+
 #MEDIA_ROOT = '/srv/www/django/media/' # Servidor old
-MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
-#MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
+#MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
+MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
+
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.

@@ -11,9 +11,15 @@ from forms import UserProfileForm
 @login_required
 def userprofile(request,action = False):
 
-    user = request.user
-
-    profile = user.profile
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/accounts/profile/')
+    else:
+        user = request.user
+        profile = user.profile
+        #form = UserProfileForm(instance=profile)
     
     args = { "user": user, "profile": profile }
 
@@ -24,17 +30,24 @@ def userprofile(request,action = False):
 @login_required
 def changeprofile(request,action = False):
 
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/accounts/profile/')
-    else:
-        user = request.user
-        profile = user.profile
-        form = UserProfileForm(instance=profile)
+    user = request.user
+    profile = user.profile
+    form = UserProfileForm(instance=profile)
 
-    args = { "user": user , 'save':'changeProfile/' }
+    args = { "user": user , 'save':'save' }
     args.update(csrf(request))
     args['form'] = form
     return render_to_response('registration/form_profile.html',args)
+
+@login_required
+def changedirection(request,action = False):
+
+    user = request.user
+    profile = user.profile
+    form = UserProfileForm(instance=profile)
+
+    args = { "user": user , 'save':'save' }
+    args.update(csrf(request))
+    args['form'] = form
+    return render_to_response('registration/form_profile.html',args)
+

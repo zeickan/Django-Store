@@ -11,6 +11,7 @@ from django.forms import Textarea
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
+        """
         fields = ['fac_nombre', 'fac_calle', 'fac_colonia', 'fac_cp','fac_ciudad','fac_estado','fac_pais','fac_telefono']
         labels = {
             'fac_nombre': ('Nombre de facturación'),
@@ -18,6 +19,7 @@ class PedidoForm(forms.ModelForm):
         widgets = {
             'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
         }
+        """
 
 
 
