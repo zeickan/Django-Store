@@ -5,4 +5,4 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('calle','direccion','cp','ciudad','estado')
+        fields = ('calle','direccion','cp','ciudad','estado',"telefono")

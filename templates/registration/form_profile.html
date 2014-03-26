@@ -1,0 +1,14 @@
+{% extends "registration/profile_base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Cambiar Perfil{% endblock %}
+{% block profile %}
+
+<form action="/accounts/profile/{{save}}" method="post">
+	{% csrf_token %} 
+
+	{{ form.as_p }}
+
+	<input type="submit" value="Guardar" />
+</form>
+
+{% endblock %}

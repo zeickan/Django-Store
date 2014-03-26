@@ -11,6 +11,19 @@ from forms import UserProfileForm
 @login_required
 def userprofile(request,action = False):
 
+    user = request.user
+
+    profile = user.profile
+    
+    args = { "user": user, "profile": profile }
+
+    return render_to_response('registration/profile_base.html',args)
+
+
+
+@login_required
+def changeprofile(request,action = False):
+
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
@@ -21,8 +34,7 @@ def userprofile(request,action = False):
         profile = user.profile
         form = UserProfileForm(instance=profile)
 
-    args = { "user": user }
+    args = { "user": user , 'save':'changeProfile/' }
     args.update(csrf(request))
     args['form'] = form
-    return render_to_response('registration/profile.html',args)
-
+    return render_to_response('registration/form_profile.html',args)
