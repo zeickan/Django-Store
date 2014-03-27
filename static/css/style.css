@@ -125,7 +125,7 @@ body.fondo {
 	border-radius: 10px;
 	text-align: center;
 	margin-bottom: 1em;
-	min-height: 280px;
+	min-height: 300px;
 }
 
 .producto .basket .preview {
@@ -165,6 +165,44 @@ body.fondo {
 }
 
 /* FORMULA */
+
+.niceButton {
+	font-size: 1.125em;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #d8452e;
+	color: #fff;
+	background: #f14c2e;
+	background: -moz-linear-gradient(top,#f14c2e 0%,#d8452e 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#f14c2e),color-stop(100%,#d8452e));
+	background: -webkit-linear-gradient(top,#f14c2e 0%,#d8452e 100%);
+	background: -o-linear-gradient(top,#f14c2e 0%,#d8452e 100%);
+	background: -ms-linear-gradient(top,#f14c2e 0%,#d8452e 100%);
+	background: linear-gradient(to bottom,#f14c2e 0%,#d8452e 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	padding: 1em 1em !important;
+	border: 1px solid #e0452f;
+	-webkit-border-radius: 5px !important;
+	-moz-border-radius: 5px !important;
+	border-radius: 5px;
+	box-shadow: none !important;
+	width: 320px !important;
+} 
+
+.niceButton:hover {
+	color:#FFF;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #d02a2d;
+	background: #e03b2e;
+	background: -moz-linear-gradient(top,#e03b2e 0%,#d02a2d 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#e03b2e),color-stop(100%,#d02a2d));
+	background: -webkit-linear-gradient(top,#e03b2e 0%,#d02a2d 100%);
+	background: -o-linear-gradient(top,#e03b2e 0%,#d02a2d 100%);
+	background: -ms-linear-gradient(top,#e03b2e 0%,#d02a2d 100%);
+	background: linear-gradient(to bottom,#e03b2e 0%,#d02a2d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
 
 .formula input.texto {
 	background: #FFF;

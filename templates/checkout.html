@@ -15,14 +15,12 @@
 
       <div class="row cart">
         
-        
-        
         <div class="large-8 columns">
             <div class="row">
 
                 <div class="large-12 columns">
 
-                    {{ formula }}
+                    {% if step == "confirm" %}
 
                     <table class="nicetable">
                         
@@ -63,6 +61,25 @@
                         -->
 
                     </table>
+
+                    <div class="bloque">
+                        <span class="right">${{ subtotal }}</span>
+                        SUBTOTAL
+                    </div>
+
+                    <div class="bloque">
+                        <span class="right">$199.00</span>
+                        ENVIO ESTANDAR POR DHL
+                    </div>
+
+                    <div class="total">
+                        <span class="right">${{ total }}</span>
+                        TOTAL:
+                    </div>
+
+                    <a href="http://127.0.0.1:8000/store/checkout/" class="niceButton right medium ">Confirmar orden</a>
+
+                    {% elif step == "address" %}
 
                     <table class="nicetable">
                         <caption>Dirección de envio</caption>
@@ -221,16 +238,13 @@
                                     </select></td>
                             </tr>
 
-
-
-
-
                         </tbody>
 
                     </table>
 
+                    {% elif step == "payment" %}
 
-                    <table class="nicetable">
+                     <table class="nicetable">
                         <caption>Metodo de envio</caption>
 
                         <tbody>
@@ -254,25 +268,15 @@
 
                     </table>
 
+                    {% elif step == "order" %}
+                        
+                        {{ form.render }}
 
-                    <div class="bloque">
-                        <span class="right">${{ subtotal }}</span>
-                        SUBTOTAL
-                    </div>
-
-                    <div class="bloque">
-                        <span class="right">$199.00</span>
-                        ENVIO ESTANDAR POR DHL
-                    </div>
-
-                    <div class="total">
-                        <span class="right">${{ total }}</span>
-                        TOTAL:
-                    </div>
+                    {% endif %}
 
 
 
-                    {{ form.render }}
+                    
 
                 </div>
 
@@ -303,9 +307,9 @@
 
                 <ul>
                     <li>{{user.first_name}} {{user.last_name}}</li>
-                    <li>{{user.profile.calle}}</li>
-                    <li>{{user.profile.direccion}} </li>
-                    <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                    <li>{{user.profile.calle_envio}}</li>
+                    <li>{{user.profile.direccion_envio}} </li>
+                    <li>{{user.profile.ciudad_envio}}, {{user.profile.estado_envio}} {{user.profile.cp_envio}}</li>
                     {{dev}}
                 </ul>
 

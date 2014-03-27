@@ -189,6 +189,12 @@ def basket(request,step = False):
             formula = PedidoForm()
 
 
+        if step == False:
+            paso = "confirm"
+        else:
+            paso = step
+
+
 
         data = {"form": form,
                "user": user,
@@ -196,7 +202,8 @@ def basket(request,step = False):
                'profile': profile,
                "subtotal" : subtotal,
                "total": total,
-               "formula": formula
+               "formula": formula,
+               "step" : paso
             }
 
 
