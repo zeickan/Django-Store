@@ -13,6 +13,10 @@ body.fondo {
 	background-size: cover;
 }
 
+.border-less {
+	border:0px solid !important;
+}
+
 .seccion  {
 	background: #CCC;
 	font-family: "source_sans_probold",helvetica,sans-serif;
@@ -229,7 +233,12 @@ body.fondo {
 	margin-bottom: 1em;
 }
 
-.formula .success h3 {
+.formula .success h1,
+.formula .success h2,
+.formula .success h3,
+.formula .success h4,
+.formula .success h5,
+.formula .success h6 {
 	color:#FFF;
 }
 

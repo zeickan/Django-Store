@@ -10,7 +10,6 @@ class UserProfile(models.Model):
     ciudad = models.CharField(max_length=100,blank=True,null=True)
     estado = models.CharField(max_length=100,blank=True,null=True)
     telefono = models.CharField(max_length=15,blank=True,null=True)
-
     calle_envio = models.CharField(max_length=200,blank=True,null=True)
     direccion_envio = models.CharField(max_length=200,blank=True,null=True)
     cp_envio = models.DecimalField(max_digits=5,decimal_places=0,blank=True,null=True)

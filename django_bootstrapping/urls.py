@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^store/product/(?P<slug>[-\w]+)/$', 'store.views.getProduct', name='store_getProduct'),
     url(r'^store/color/(?P<slug>[-\w]+)/$', 'store.views.getProductByColor', name='store_getProductByColor'),
 
+    # Seccion
 
     url(r'^seccion/(?P<slug>[-\w]+)/$', 'store.views.seccion', name='seccion'),
     
@@ -34,31 +35,32 @@ urlpatterns = patterns('',
     
     (r'^accounts/login/$',  login),
     (r'^accounts/logout/$', logout),
-
-    #url(r'^accounts/profile/$', 'userprofile.views.userprofile', name='user_profile'),
     (r'^accounts/',include('userprofile.urls')),
     url(r'^accounts/register/$', 'store.views.register', name='user_register'),
+
+    #url(r'^accounts/profile/$', 'userprofile.views.userprofile', name='user_profile'),    
     #url(r'^accounts/login/registerSuccess$','userprofile.views.registersuccess'),
 
+    # Basket
     
     url(r'^basket/$', 'store.views.basket', name='basket'),
-
     url(r'^basket/ipn$', 'store.views.ipn', name='ipn'),
-
     (r'^basket/request/ipn/notify/', include('paypal.standard.ipn.urls')),
     
+
     #url(r'^payment\.html$', 'store.views.payment', name='payment'),
-    #url(r'^confirmation\.html$', 'store.views.confirmation', name='confirmation'),
-    
+    #url(r'^confirmation\.html$', 'store.views.confirmation', name='confirmation'),    
     #url(r'^payment-url/$', 'store.views.buy_my_item'),
     #url(r'^some/obscure/name/', include('paypal.standard.ipn.urls')),
     # url(r'^django_bootstrapping/', include('django_bootstrapping.foo.urls')),
 
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^humans\.txt$', 'humano.views.genTextFile', name='humanstxt' ),
+    # Humans TXT & TinyMCE
 
+    url(r'^humans\.txt$', 'humano.views.genTextFile', name='humanstxt' ),
     (r'^tinymce/', include('tinymce.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

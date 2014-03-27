@@ -30,12 +30,11 @@
                     
                     <ul> 
                         <li><a href="{{ BASE_URL }}/accounts/profile/">Dashboard</a></li>
-                        <li><a href="#">Información de la cuenta</a></li>
-                        <li><a href="#">Mi dirección</a></li>
+                        <li><a href="{{ BASE_URL }}/accounts/profile/changeInformation/">Información de la cuenta</a></li>
+                        <li><a href="{{ BASE_URL }}/accounts/profile/billingAddress/">Mi dirección de facturación</a></li>
+                        <li><a href="{{ BASE_URL }}/accounts/profile/shippingAddress/">Mi dirección de envio</a></li>
                         <li><a href="#">Mis pedidos</a></li>
                         <li><a href="#">Mi lista de deseados</a></li>
-                        <li><a href="#">My reviews</a></li>
-                        <li><a href="#">My wallet</a></li>
                         <li><hr></li>
                         <li><a href="{{ BASE_URL }}/accounts/logout/">Logout</a></li>
                         <li><a href="{{ BASE_URL }}/store/">Ir a la tienda</a></li>
@@ -68,7 +67,7 @@
                             <div class="large-4  columns">
                                 
                                 <p class="formato">
-                                    Información de contacto 
+                                    Información de contacto <a href="{{ BASE_URL }}/accounts/profile/changeInformation/" class="mini">editar</a>
                                 </p>
 
                                 <ul class="formato">
@@ -81,7 +80,7 @@
                             </div>
                             <div class="large-4 omega columns">
                                 
-                                <p class="formato">Dirección de facturación <a href="{{ BASE_URL }}/accounts/profile/changeProfile/" class="mini">editar</a></p>
+                                <p class="formato">Dirección de facturación <a href="{{ BASE_URL }}/accounts/profile/billingAddress/" class="mini">editar</a></p>
 
                                 <ul class="formato">
                                     <li>{{ profile.calle }}</li>    
@@ -93,7 +92,7 @@
                             </div>
                             <div class="large-4  columns">
                                 
-                                <p class="formato">Dirección de envio <a href="{{ BASE_URL }}/accounts/profile/changeProfile/" class="mini">editar</a></p>
+                                <p class="formato">Dirección de envio <a href="{{ BASE_URL }}/accounts/profile/shippingAddress/" class="mini">editar</a></p>
 
                                 <ul class="formato">
                                     <li>{{ profile.calle_envio }}</li>    
