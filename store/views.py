@@ -17,6 +17,17 @@ SITE_URL = settings.SITE_URL
 
 
 def pruebas(request):
+
+# Formulario
+
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #return HttpResponseRedirect('/debug/')
+    else:
+        form = PedidoForm()
+
     
 # productos en la cesta
     try:
@@ -43,15 +54,7 @@ def pruebas(request):
     user = request.user
     profile = user.profile
 
-# Formulario
 
-    if request.method == 'POST':
-        formula = ProPedidoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/debug/')
-    else:
-        formula = ProPedidoForm()
 
 
 # Datos extras
@@ -63,7 +66,7 @@ def pruebas(request):
            'profile': profile,
            "subtotal" : subtotal,
            "total": total,
-           "formula": formula,
+           "formula": form,
            "step" : paso
         }
 

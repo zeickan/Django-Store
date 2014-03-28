@@ -11,8 +11,8 @@ from django.forms import Textarea
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
+        fields = ['comprador', 'custom', 'fac_nombre', 'fac_calle', 'fac_colonia', 'fac_cp','fac_ciudad','fac_estado','fac_pais','fac_telefono']
         """
-        fields = ['fac_nombre', 'fac_calle', 'fac_colonia', 'fac_cp','fac_ciudad','fac_estado','fac_pais','fac_telefono']
         labels = {
             'fac_nombre': ('Nombre de facturación'),
         }
@@ -25,8 +25,16 @@ class UniqueCustomCode(forms.CharField):
     """
     Validamos que el Custom Code no se este usando ya (podria pasar)
     """
+    def validate(self,value):
+        super(forms.CharField, self).validate(value)
+        try:
+            Pedido.objects.get( custom = value )
+            raise forms.ValidationError("Custom Code Invalido")
+        except Pedido.MultipleObjectsReturned:
+            raise forms.ValidationError("Custom Code invalido")
+        except Pedido.DoesNotExist:
+            pass
 
-    
 
 
 
