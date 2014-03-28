@@ -23,8 +23,20 @@
                     <form action="/debug/" method="post" enctype="multipart/form-data">
 
                         {% csrf_token %} 
+                        
+                        {{ formula.non_field_errors }}
 
-                        {{ formula.as_p }}
+                        <div class="fieldWrapper">
+                            {{ formula.custom.errors }}
+                            <label for="id_custom">Custom Code:</label>
+                            {{ formula.custom }}
+                        </div>
+
+                        <div class="fieldWrapper">
+                            {{ formula.fac_nombre.errors }}
+                            <label for="id_fac_nombre">Nombre de facturación</label>
+                            {{ formula.fac_nombre }}
+                        </div>
 
                         <input type="submit" value="Guardar" />
 

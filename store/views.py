@@ -28,12 +28,12 @@ def pruebas(request):
 # Formulario
 
     if request.method == 'POST':
-        form = PedidoForm(request.POST)
+        form = ProPedidoForm(request.POST)
         if form.is_valid():
             form.save()
             #return HttpResponseRedirect('/debug/')
     else:
-        form = PedidoForm()
+        form = ProPedidoForm()
 
     
 # productos en la cesta
@@ -201,13 +201,15 @@ def basket(request,step = False):
     
     if request.user.is_authenticated():
 
+        user = request.user
+
         if request.method == 'POST':
-            formula = PedidoForm(request.POST)
+            formula = ProPedidoForm(request.POST, user.id )
             if formula.is_valid():
                 formula.save()
                 #return HttpResponseRedirect('/')
         else:
-            formula = PedidoForm()
+            formula = ProPedidoForm()
 
 
         try:
@@ -243,14 +245,14 @@ def basket(request,step = False):
 
         form = PayPalPaymentsForm(initial=paypal_dict)
 
-        user = request.user
+        
 
         profile = user.profile
 
         if step == False:
             paso = "confirm"
             custom = random_generator(18,string.ascii_lowercase + string.ascii_uppercase + string.digits ) #+ '!#$%&/()=?[]-_*'
-            save = 'address/'
+            save = ''
         else:
             paso = step
             custom = request.POST['custom']

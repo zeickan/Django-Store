@@ -22,6 +22,10 @@
 
                     <form action="{{ BASE_URL }}/store/checkout/{{save}}" enctype="multipart/form-data" method="post">
                     {% csrf_token %} 
+                    {{ formula.non_field_errors }}
+
+                    <input id="id_custom" maxlength="150" name="custom" type="text" value="{{custom}}">
+                    {{ formula.custom.errors }}
 
                     {% if step == "confirm" %}
                         
@@ -31,6 +35,11 @@
                                     <option selected="selected" value="{{items.id}}">{{items.nombre}}</option>
                                 {% endfor %}
                             </select>
+                        </div>
+                        
+                        <div class="fieldWrapper">
+                            {{ formula.productos.errors }}                            
+                            {{ formula.comprador.errors }}
                         </div>
 
                         <table class="nicetable">
@@ -290,8 +299,8 @@
 
                     {% endif %}
 
-                        <input id="id_comprador" maxlength="150" name="comprador" type="text" value="{{user.id}}">
-                        <input id="id_custom" maxlength="150" name="custom" type="text" value="{{custom}}">
+                       
+
                                     
                             
              

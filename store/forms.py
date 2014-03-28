@@ -7,56 +7,13 @@ from django.contrib.auth.forms import UserCreationForm
 from store.models import *
 from django.forms import Textarea
 
+#### PEDIDOS
 
 class PedidoForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        super(DebateMediaForm, self).__init__(*args, **kwargs)
-        self.fields['image'].required = True
-        self.fields['source'].label = "Image Source"
-
     class Meta:
         model = Pedido
-        fields = ['comprador', 'custom', 'fac_nombre', 'fac_calle', 'fac_colonia', 'fac_cp','fac_ciudad','fac_estado','fac_pais','fac_telefono']
-        """
-        labels = {
-            'fac_nombre': ('Nombre de facturación'),
-        }
-        widgets = {
-            'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
-        }
-        """
-
-    def clean(self):
-        super(MyModelFormSet, self).clean()
-
-        for form in self.forms:
-            name = form.cleaned_data['name'].upper()
-            form.cleaned_data['name'] = name
-            # update the instance value.
-            form.instance.name = name
-
-    def save(self, user, debate):
-        media = super(DebateMediaForm, self).save(commit=False)
-        media.added_by = user
-        media.related_debate = debate
-        media.content_type = "P"
-        media.save()
-        return debate
-
-
-class PedidoConfirmForm(forms.ModelForm):
-    class Meta:
-        model = Pedido
-        fields = ['comprador', 'productos','custom']
-        labels = {
-            'comprador': ('Nombre de facturación'),
-        }
-        """
-        widgets = {
-            'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
-        }
-        """
+        #fields = ['comprador', 'custom', 'fac_nombre']
 
 
 class UniqueCustomCode(forms.CharField):
@@ -75,13 +32,47 @@ class UniqueCustomCode(forms.CharField):
 
 
 
+class ProPedidoForm(PedidoForm):
 
-class ProPedidoForm(forms.ModelForm):
+    comprador = forms.CharField(required=False,max_length=20)
+    custom = UniqueCustomCode(required = True, label = 'Custom Code')
+    fac_nombre = forms.CharField(required=False,max_length=255)
 
-    class Meta:
-        model = Pedido
-        fields = ['comprador', 'custom', 'paid']
+    def __init__(self, *args, **kwargs):
+        """
+        Cambiar orden de los campos y personalizar Comprador
+        """
+        super(PedidoForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = ['comprador','custom', 'productos',]
+ 
+    def __get_userid(self,user):
+        # TODO: Something more efficient?
+        derived_username = user
+        return derived_username
+    
+    def clean(self, *args, **kwargs):
 
+        cleaned_data = super(PedidoForm, self).clean(*args, **kwargs)
+        
+        cleaned_data['comprador'] = self.__get_userid( args )
+
+        return cleaned_data
+        
+    def save(self, commit=True):
+
+        form = super(PedidoForm, self).save(commit)
+
+        if form:
+            form.comprador = self.cleaned_data['comprador']
+            form.custom = self.cleaned_data['custom']
+            form.productos = self.cleaned_data['productos']
+
+            if commit:
+                form.save()
+        return form
+
+
+##### USUARIOS
 
 
 class UniqueUserEmailField(forms.EmailField):
