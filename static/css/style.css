@@ -166,12 +166,25 @@ body.fondo {
 
 /* FORMULA */
 
+input, select, textarea {
+	-webkit-font-smoothing: antialiased; 
+	-moz-font-smoothing: antialiased; 
+	-o-font-smoothing: antialiased; 
+	-ms-font-smoothing: antialiased; 
+	font-smoothing: antialiased; 
+}
+
+.hidemyass {
+	display: none;
+}
+
 .niceButton {
 	font-size: 1.125em;
-	font-weight: bold;
+	font-weight: 100;
 	text-align: center;
 	text-decoration: none;
-	text-shadow: 0 -1px 1px #d8452e;
+	text-shadow: 0 -1px 1px #d8452e !important;
+	font-family: "source_sans_probold",helvetica,sans-serif;
 	color: #fff;
 	background: #f14c2e;
 	background: -moz-linear-gradient(top,#f14c2e 0%,#d8452e 100%);
@@ -188,6 +201,7 @@ body.fondo {
 	border-radius: 5px;
 	box-shadow: none !important;
 	width: 320px !important;
+	height: 60px;
 } 
 
 .niceButton:hover {

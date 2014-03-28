@@ -12,12 +12,15 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_red',                      # Or path to database file if using sqlite3.
+        'NAME': 'dev_store',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'dev',
         'PASSWORD': 'qwe8521z_dev',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
+        'OPTIONS': {
+               "init_command": "SET storage_engine=MyISAM",
+        }  
     }
 }
 
@@ -56,8 +59,8 @@ USE_TZ = True
 # Example: "/var/www/example.com/media/"
 
 #MEDIA_ROOT = '/srv/www/django/media/' # Servidor old
-#MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
-MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
+MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
+#MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a

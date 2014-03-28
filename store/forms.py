@@ -9,6 +9,12 @@ from django.forms import Textarea
 
 
 class PedidoForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(DebateMediaForm, self).__init__(*args, **kwargs)
+        self.fields['image'].required = True
+        self.fields['source'].label = "Image Source"
+
     class Meta:
         model = Pedido
         """
@@ -20,6 +26,38 @@ class PedidoForm(forms.ModelForm):
             'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
         }
         """
+
+    def clean(self):
+        super(MyModelFormSet, self).clean()
+
+        for form in self.forms:
+            name = form.cleaned_data['name'].upper()
+            form.cleaned_data['name'] = name
+            # update the instance value.
+            form.instance.name = name
+
+    def save(self, user, debate):
+        media = super(DebateMediaForm, self).save(commit=False)
+        media.added_by = user
+        media.related_debate = debate
+        media.content_type = "P"
+        media.save()
+        return debate
+
+
+class PedidoConfirmForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['comprador', 'productos','custom']
+        labels = {
+            'comprador': ('Nombre de facturación'),
+        }
+        """
+        widgets = {
+            'fac_nombre': Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
+        """
+
 
 
 

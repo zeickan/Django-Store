@@ -10,10 +10,16 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from forms import ExtendedUserCreationForm
 from paypal.standard.forms import PayPalPaymentsForm
-
+from store.forms import *
+from decimal import Decimal
+import random
+import string
 import re
 
 SITE_URL = settings.SITE_URL
+
+def random_generator(size=6 , chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for x in range(size))
 
 def principal(request):
     #categorias = Categoria.objects.all()
@@ -133,14 +139,20 @@ def getProductByColor(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
-from store.forms import *
-
-from decimal import Decimal
 
 
 def basket(request,step = False):
     
     if request.user.is_authenticated():
+
+        if request.method == 'POST':
+            formula = PedidoForm(request.POST)
+            if formula.is_valid():
+                formula.save()
+                #return HttpResponseRedirect('/')
+        else:
+            formula = PedidoForm()
+
 
         try:
             basket = request.session['basket']
@@ -159,7 +171,6 @@ def basket(request,step = False):
             precio = Decimal(items.precio)
             sumar.append(precio)
 
-
         subtotal = sum(sumar)
         total = subtotal+199
 
@@ -176,25 +187,18 @@ def basket(request,step = False):
 
         form = PayPalPaymentsForm(initial=paypal_dict)
 
-
         user = request.user
+
         profile = user.profile
-
-        if request.method == 'POST':
-            formula = PedidoForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
-        else:
-            formula = PedidoForm()
-
 
         if step == False:
             paso = "confirm"
+            custom = random_generator(18,string.ascii_lowercase + string.ascii_uppercase + string.digits ) #+ '!#$%&/()=?[]-_*'
+            save = 'address/'
         else:
             paso = step
-
-
+            custom = request.POST['custom']
+            save = 'payment'
 
         data = {"form": form,
                "user": user,
@@ -203,11 +207,10 @@ def basket(request,step = False):
                "subtotal" : subtotal,
                "total": total,
                "formula": formula,
-               "step" : paso
+               "step" : paso,
+               "custom" : custom,
+               "save" : save
             }
-
-
-
 
         return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 
