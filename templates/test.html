@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Prueba{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}/">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row cart">
+        
+        <div class="large-12 columns">
+            <div class="row">
+
+                <div class="large-12 columns">
+
+                    <form action="/debug/" method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %} 
+
+                        {{ formula.as_p }}
+
+                        <input type="submit" value="Guardar" />
+
+                    </form>
+                    
+                    <table class="nicetable">
+                        
+                        <thead>
+                            <tr>
+                                <th colspan="2">PRODUCTO</th>
+                                <th>COLOR</th>
+                                <th>ELIMINAR</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {%for items in lista %}
+                            <tr>
+                                <td width="20%" align="center">
+                                    {% if items.imagen == '' %}
+                                        <img src="{{ BASE_URL}}/static/img/noimage.jpg" width="50">
+                                    {% else %}
+                                        <img src="/media/{{items.imagen}}" width="50">
+                                    {% endif %}
+                                </td>
+                                <td width="45%">{{items.nombre}}</td>
+                                <td width="10%">{% for obj in items.colores.all %} {{obj.color}} {% endfor %}</td>
+                                <td width="15%"><!-- <input type="text" class="mini" value="1">--><a href="{{ BASE_URL }}/api/delItem?id={{ items.id }}" class="fa fa-trash-o"></a></td>
+                                <td width="10%">${{items.precio}}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                        <!--
+                        <tfoot>
+                            <tr>
+                                <td>PROMO CODE</td>
+                                <td colspan="4"><input type="text" value="" placeholder="Coupon"></td>
+                            </tr>
+                        </tfoot>
+                        -->
+
+                    </table>
+
+                    <div class="bloque">
+                        <span class="right">${{ subtotal }}</span>
+                        SUBTOTAL
+                    </div>
+
+                    <div class="bloque">
+                        <span class="right">$199.00</span>
+                        ENVIO ESTANDAR POR DHL
+                    </div>
+
+                    <div class="total">
+                        <span class="right">${{ total }}</span>
+                        TOTAL:
+                    </div>
+
+                    <a href="http://127.0.0.1:8000/store/checkout/" class="niceButton right medium ">Confirmar orden</a>
+
+                    
+
+
+                    
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

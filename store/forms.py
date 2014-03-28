@@ -21,6 +21,20 @@ class PedidoForm(forms.ModelForm):
         }
         """
 
+class UniqueCustomCode(forms.CharField):
+    """
+    Validamos que el Custom Code no se este usando ya (podria pasar)
+    """
+
+    
+
+
+
+class ProPedidoForm(forms.ModelForm):
+
+    class Meta:
+        model = Pedido
+        fields = ['comprador', 'custom', 'paid']
 
 
 class UniqueUserEmailField(forms.EmailField):

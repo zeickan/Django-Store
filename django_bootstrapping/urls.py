@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^store/product/(?P<slug>[-\w]+)/$', 'store.views.getProduct', name='store_getProduct'),
     url(r'^store/color/(?P<slug>[-\w]+)/$', 'store.views.getProductByColor', name='store_getProductByColor'),
 
+    url(r'^debug/$', 'store.views.pruebas', name='pruebas'),
+
     # Seccion
 
     url(r'^seccion/(?P<slug>[-\w]+)/$', 'store.views.seccion', name='seccion'),
