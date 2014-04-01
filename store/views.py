@@ -1,82 +1,32 @@
 # -*- encoding: utf-8 -*-
 
+### Django Funcions
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.translation import ugettext
 from django.conf import settings
-from store.models import *
 from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedirect
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
-from forms import ExtendedUserCreationForm
-from paypal.standard.forms import PayPalPaymentsForm
+
+# App Includes
+from store.models import *
 from store.forms import *
+from store.functions import random_generator
+# Python 
 from decimal import Decimal
-import random
+
+# Other Apps
+from paypal.standard.forms import PayPalPaymentsForm
 import string
-import re
+#URL SITE 
 
 SITE_URL = settings.SITE_URL
 
 
-def random_generator(size=6 , chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for x in range(size))
 
 
-def pruebas(request):
-
-# Formulario
-
-    if request.method == 'POST':
-        form = ProPedidoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            #return HttpResponseRedirect('/debug/')
-    else:
-        form = ProPedidoForm()
-
-    
-# productos en la cesta
-    try:
-        basket = request.session['basket']
-    except KeyError:
-        basket = []
-
-    cesta = []
-    for row in basket:
-        cesta.append( re.sub("([^0-9]+)", "", row) )
-
-    productos = Producto.objects.filter(id__in=cesta)
-# Obtenemos total y sumamos el envio
-    sumar = []
-    for items in productos:
-        precio = Decimal(items.precio)
-        sumar.append(precio)
-
-    subtotal = sum(sumar)
-    total = subtotal+199
-
-# Usuario y perfil
-
-    user = request.user
-    profile = user.profile
-
-# Datos extras
-    paso = 'confirm'
-
-    data = {
-           "user": user,
-           "lista": productos,
-           'profile': profile,
-           "subtotal" : subtotal,
-           "total": total,
-           "formula": form,
-           "step" : paso
-        }
-
-    return render_to_response("test.html", context_instance=RequestContext(request,data))
-
-
+### Principal
 def principal(request):
     #categorias = Categoria.objects.all()
     #productos = Producto.objects.all()
@@ -85,6 +35,7 @@ def principal(request):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+# Obtenemos los productos
 def getProducts(request,slug=False):
     
     if request.method == "GET":
@@ -136,6 +87,7 @@ def getProducts(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+# Ficha de producto
 def getProduct(request,slug=False):
 
     try:
@@ -164,7 +116,7 @@ def getProduct(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
-
+# Productos por Color
 def getProductByColor(request,slug=False):
 
     try:
@@ -196,69 +148,57 @@ def getProductByColor(request,slug=False):
 
 
 
-
+# Cesta de pago
 def basket(request,step = False):
     
     if request.user.is_authenticated():
 
         user = request.user
 
-        if request.method == 'POST':
-            formula = ProPedidoForm(request.POST, user.id )
-            if formula.is_valid():
-                formula.save()
-                #return HttpResponseRedirect('/')
-        else:
-            formula = ProPedidoForm()
-
-
-        try:
-            basket = request.session['basket']
-        except KeyError:
-            basket = []
-
-        cesta = []
-        for row in basket:
-            cesta.append( re.sub("([^0-9]+)", "", row) )
-
-        # productos en la cesta
-        productos = Producto.objects.filter(id__in=cesta)
-
-        sumar = []
-        for items in productos:
-            precio = Decimal(items.precio)
-            sumar.append(precio)
-
-        subtotal = sum(sumar)
-        total = subtotal+199
-
-        paypal_dict = {
-            "business": "paypal-facilitator@zeickan.com",
-            "amount": total,
-            "currency_code": "MXN",
-            "item_name": "Compra",
-            "invoice": "0001-32-0001",
-            "notify_url": SITE_URL+"/basket/request/ipn/notify/",
-            "return_url": SITE_URL+"/basket/return/",
-            "cancel_return": SITE_URL+"/basket/return/",
-        }
-
-        form = PayPalPaymentsForm(initial=paypal_dict)
-
-        
-
         profile = user.profile
 
         if step == False:
             paso = "confirm"
-            custom = random_generator(18,string.ascii_lowercase + string.ascii_uppercase + string.digits ) #+ '!#$%&/()=?[]-_*'
             save = ''
-        else:
-            paso = step
-            custom = request.POST['custom']
-            save = 'payment'
+            custom = random_generator(32,string.ascii_lowercase + string.ascii_uppercase + string.digits ) #+ '!#$%&/()=?[]-_*'
 
-        data = {"form": form,
+            try:
+                basket = request.session['basket']
+            except KeyError:
+                basket = []
+
+            cesta = []
+            for row in basket:
+                cesta.append( re.sub("([^0-9]+)", "", row) )
+
+            # productos en la cesta
+            productos = Producto.objects.filter(id__in=cesta)
+
+            sumar = []
+            for items in productos:
+                precio = Decimal(items.precio)
+                sumar.append(precio)
+
+            subtotal = sum(sumar)
+            total = subtotal+199
+
+            if request.method == 'POST':
+                request.POST['custom'] = custom
+                request.POST["comprador"] = user.id
+                request.POST["subtotal"] = subtotal
+                request.POST["envio"] = 199
+                request.POST["total"] = total
+                formula = ProPedidoForm(request.POST)
+                if formula.is_valid():
+                    formula.save()
+                    #request.session['basket'] = []
+                    return HttpResponseRedirect('/store/checkout/address/?custom='+custom)
+            else:
+                formula = ProPedidoForm()
+
+            
+
+            data = {
                "user": user,
                "lista": productos,
                'profile': profile,
@@ -267,8 +207,97 @@ def basket(request,step = False):
                "formula": formula,
                "step" : paso,
                "custom" : custom,
-               "save" : save
+               "save" : save,
+               "debug" : request.GET
             }
+
+        elif step == "address":
+
+            paso = step
+            customcode = request.GET["custom"]
+            save = 'address/?custom='+customcode            
+
+            pedido = Pedido.objects.get(custom=customcode)
+
+            if request.method == 'POST':
+                request.POST['custom'] = customcode
+                #request.POST['comprador'] = user.id
+                request.POST['fac_pais'] = 'Mexico'
+                request.POST['envio_pais'] = 'Mexico'
+        
+                formula = AddressPedidoForm(request.POST,instance=pedido)
+                if formula.is_valid():
+                    formula.save()
+                    return HttpResponseRedirect('/store/checkout/payment/?custom='+customcode)
+            else:
+                formula = AddressPedidoForm(instance=pedido)
+
+
+            data = { 
+                "user": user,
+                'profile': profile,
+                "step" : paso,
+                "custom" : customcode,
+                "save" : save,
+                "formula" : formula,
+                "items" : pedido,
+                "debug" : request.GET,
+            }
+
+        elif step == "payment":
+
+            paso = step
+            customcode = request.GET["custom"]
+            save = 'finish/?custom='+customcode
+
+            pedido = Pedido.objects.get(custom=customcode)     
+
+            if request.method == 'POST':
+                request.POST['custom'] = customcode
+                #request.POST['comprador'] = user.id
+                request.POST['fac_pais'] = 'Mexico'
+                request.POST['envio_pais'] = 'Mexico'
+        
+                formula = AddressPedidoForm(request.POST,instance=pedido)
+                if formula.is_valid():
+                    formula.save()
+                    return HttpResponseRedirect('/store/checkout/payment/?custom='+customcode)
+            else:
+                formula = AddressPedidoForm(instance=pedido)       
+
+            data = { 
+                "user": user,
+                'profile': profile,
+                "step" : paso,
+                "custom" : customcode,
+                "save" : save,
+                "formula" : formula,
+                "items" : pedido,
+                "debug" : request.GET,
+            }
+
+        else:
+            paso = step
+            save = 'payment'
+            custom = request.GET["custom"]
+
+
+            data = { }
+
+        """
+                paypal_dict = {
+                    "business": "paypal-facilitator@zeickan.com",
+                    "amount": total,
+                    "currency_code": "MXN",
+                    "item_name": "Compra",
+                    "invoice": "0001-32-0001",
+                    "notify_url": SITE_URL+"/basket/request/ipn/notify/",
+                    "return_url": SITE_URL+"/basket/return/",
+                    "cancel_return": SITE_URL+"/basket/return/",
+                }
+
+                form = PayPalPaymentsForm(initial=paypal_dict)
+        """
 
         return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 

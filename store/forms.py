@@ -13,7 +13,13 @@ class PedidoForm(forms.ModelForm):
 
     class Meta:
         model = Pedido
-        #fields = ['comprador', 'custom', 'fac_nombre']
+
+
+class AddressPedidoForm(forms.ModelForm):
+
+    class Meta:
+        model = Pedido
+        fields = ('custom','fac_nombre','fac_calle','fac_colonia','fac_cp','fac_ciudad','fac_estado','fac_pais','envio_nombre','envio_calle','envio_colonia','envio_cp','envio_ciudad','envio_estado','envio_pais')
 
 
 class UniqueCustomCode(forms.CharField):
@@ -31,19 +37,21 @@ class UniqueCustomCode(forms.CharField):
             pass
 
 
-
 class ProPedidoForm(PedidoForm):
 
     comprador = forms.CharField(required=False,max_length=20)
     custom = UniqueCustomCode(required = True, label = 'Custom Code')
     fac_nombre = forms.CharField(required=False,max_length=255)
+    subtotal = forms.CharField(required=False,max_length=20)
+    envio = forms.CharField(required=False,max_length=20)
+    total = forms.CharField(required=False,max_length=20)
 
     def __init__(self, *args, **kwargs):
         """
         Cambiar orden de los campos y personalizar Comprador
         """
         super(PedidoForm, self).__init__(*args, **kwargs)
-        self.fields.keyOrder = ['comprador','custom', 'productos',]
+        self.fields.keyOrder = ['comprador','custom', 'productos','subtotal','envio','total']
  
     def __get_userid(self,user):
         # TODO: Something more efficient?
@@ -54,7 +62,7 @@ class ProPedidoForm(PedidoForm):
 
         cleaned_data = super(PedidoForm, self).clean(*args, **kwargs)
         
-        cleaned_data['comprador'] = self.__get_userid( args )
+        #cleaned_data['comprador'] = self.__get_userid( args )
 
         return cleaned_data
         
@@ -66,14 +74,18 @@ class ProPedidoForm(PedidoForm):
             form.comprador = self.cleaned_data['comprador']
             form.custom = self.cleaned_data['custom']
             form.productos = self.cleaned_data['productos']
+            form.subtotal = self.cleaned_data['subtotal']
+            form.envio = self.cleaned_data['envio']
+            form.total = self.cleaned_data['total']
 
             if commit:
                 form.save()
         return form
 
 
-##### USUARIOS
 
+
+##### USUARIOS
 
 class UniqueUserEmailField(forms.EmailField):
     """

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}Red Carpet : Caja{% endblock %}
+{% block debug %}<div class="debug">{{debug}}</div>{% endblock %}
 {% block content %}
 
 
@@ -22,9 +23,9 @@
 
                     <form action="{{ BASE_URL }}/store/checkout/{{save}}" enctype="multipart/form-data" method="post">
                     {% csrf_token %} 
+                    
                     {{ formula.non_field_errors }}
 
-                    <input id="id_custom" maxlength="150" name="custom" type="text" value="{{custom}}">
                     {{ formula.custom.errors }}
 
                     {% if step == "confirm" %}
@@ -113,8 +114,8 @@
 
                                 <tr>
                                     <td>Entregar a:</td>
-                                    <td>
-                                        <input type="text" name="" value="" placeholder="{{ user.first_name }} {{ user.last_name }}">
+                                    <td>{{ formula.fac_nombre.errors }}
+                                        <input type="text" name="fac_nombre" value="{{ user.first_name }} {{ user.last_name }}" placeholder="{{ user.first_name }} {{ user.last_name }}">
                                     <p style="clear:both;">
                                         <small>Dejalo en blanco para entregarlo a tu nombre.</small>
                                     </td>
@@ -122,27 +123,27 @@
 
                                 <tr>
                                     <td>Calle y Número</td>
-                                    <td><input type="text" name="" value="" placeholder="Calle #ext #int"></td>
+                                    <td>{{ formula.fac_calle.errors }}<input type="text" name="fac_calle" value="{% if profile.calle %}{{profile.calle}}{% endif %}" placeholder="Calle #ext #int"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Colonia o Poblado</td>
-                                    <td><input type="text" name="" value="" placeholder="Colonia"></td>
+                                    <td>{{ formula.fac_colonia.errors }}<input type="text" name="fac_colonia" value="{% if profile.direccion %}{{profile.direccion}}{% endif %}" placeholder="Colonia"></td>
                                 </tr>
 
                                 <tr>
                                     <td>C.P</td>
-                                    <td><input type="text" name="" value="" maxlength="5" size="5" placeholder=""></td>
+                                    <td>{{ formula.fac_cp.errors }}<input type="text" name="fac_cp" value="{% if profile.cp %}{{profile.cp}}{% endif %}" maxlength="5" size="5" placeholder=""></td>
                                 </tr>
 
                                 <tr>
                                     <td>Ciudad</td>
-                                    <td><input type="text" name="" value="" placeholder="Ciudad"></td>
+                                    <td>{{ formula.fac_ciudad.errors }}<input type="text" name="fac_ciudad" value="{% if profile.ciudad %}{{profile.ciudad}}{% endif %}" placeholder="Ciudad"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Estado</td>
-                                    <td><select name="state" id="state">
+                                    <td>{{ formula.fac_estado.errors }}<select name="fac_estado" id="id_fac_estado">
                                             <option value="Aguascalientes">Aguascalientes</option>
                                             <option value="Baja California">Baja California</option>
                                             <option value="Baja California Sur">Baja California Sur</option>
@@ -191,43 +192,37 @@
 
                                 <tr>
                                     <td>Facturar a:</td>
-                                    <td>
-                                        <input type="text" name="" value="" placeholder="{{ user.first_name }} {{ user.last_name }}">
+                                    <td>{{ formula.envio_nombre.errors }}
+                                        <input type="text" name="envio_nombre" value="{{ user.first_name }} {{ user.last_name }}" placeholder="{{ user.first_name }} {{ user.last_name }}">
                                     <p style="clear:both;">
                                         <small>Dejalo en blanco para entregarlo a tu nombre.</small>
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td>Correo electrónico:</td>
-                                    <td>
-                                        <input type="text" name="" value="" placeholder="{{ user.email }}">
-                                    </td>
-                                </tr>
-
+                               
                                 <tr>
                                     <td>Calle y Número</td>
-                                    <td><input type="text" name="" value="" placeholder="Calle #ext #int"></td>
+                                    <td>{{ formula.envio_calle.errors }}<input type="text" name="envio_calle" value="{% if profile.calle %}{{profile.calle}}{% endif %}" placeholder="Calle #ext #int"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Colonia o Poblado</td>
-                                    <td><input type="text" name="" value="" placeholder="Colonia"></td>
+                                    <td>{{ formula.envio_colonia.errors }}<input type="text" name="envio_colonia" value="{% if profile.direccion %}{{profile.direccion}}{% endif %}" placeholder="Colonia"></td>
                                 </tr>
 
                                 <tr>
                                     <td>C.P</td>
-                                    <td><input type="text" name="" value="" maxlength="5" size="5" placeholder=""></td>
+                                    <td>{{ formula.envio_cp.errors }}<input type="text" name="envio_cp" value="{% if profile.cp %}{{profile.cp}}{% endif %}" maxlength="5" size="5" placeholder=""></td>
                                 </tr>
 
                                 <tr>
                                     <td>Ciudad</td>
-                                    <td><input type="text" name="" value="" placeholder="Ciudad"></td>
+                                    <td>{{ formula.envio_ciudad.errors }}<input type="text" name="envio_ciudad" value="{% if profile.ciudad %}{{profile.ciudad}}{% endif %}" placeholder="Ciudad"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Estado</td>
-                                    <td><select name="state" id="state">
+                                    <td>{{ formula.envio_estado.errors }}<select name="envio_estado" id="id_envio_estado">
                                             <option value="Aguascalientes">Aguascalientes</option>
                                             <option value="Baja California">Baja California</option>
                                             <option value="Baja California Sur">Baja California Sur</option>
@@ -266,6 +261,10 @@
                             </tbody>
 
                         </table>
+
+                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Seguir comprando</a>
+
+                        <input type="submit" value="Confirmar orden" class="niceButton right medium " />
 
                     {% elif step == "payment" %}
 
