@@ -481,6 +481,20 @@ input, select, textarea {
 	margin-top: 10px;
 }
 
+.nicetable .biglabel {
+	font-family: "source_sans_proregular",helvetica,sans-serif;
+	font-size: 1em;
+}
+
+.payment img {
+	width: 64px;
+}
+
+.nicetable .radio {
+	float: left;
+	margin: 25px 5px 0px 5px;
+}
+
 .cart .bloque {
 	background: #EEE;
 	font-family: "source_sans_probold",helvetica,sans-serif;

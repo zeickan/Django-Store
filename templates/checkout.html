@@ -262,35 +262,60 @@
 
                         </table>
 
-                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Seguir comprando</a>
+                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
 
                         <input type="submit" value="Confirmar orden" class="niceButton right medium " />
 
                     {% elif step == "payment" %}
 
-                        <table class="nicetable">
+                        <table class="nicetable payment">
                             <caption>Metodo de envio</caption>
 
                             <tbody>
 
                                 <tr>
-                                    <td><input type="radio" value="estandar" name="shipping_method" id="shipping" checked="checked"><label for="shipping">Metodo de envio estandar DHL - $199.00</label> </td>
+                                    <td><input type="radio" value="estandar" name="shipping_method" id="shipping" checked="checked" class="radio">
+                                        <label class="biglabel" for="shipping">
+                                            <img src="/static/images/icons/payments-cards/png/estafeta.png">
+
+                                            Metodo de envio estandar por Estafeta - $199.00
+                                            
+                                        </label> 
+                                    </td>
                                 </tr>
                             </tbody>
 
                         </table>
 
-                        <table class="nicetable">
+                        <table class="nicetable payment">
                             <caption>Metodo de pago</caption>
 
                             <tbody>
 
                                 <tr>
-                                    <td><input type="radio" value="estandar" name="payment_method" id="paypal"  checked="checked"><label for="paypal">Paypal</label> </td>
+                                    <td>
+                                        <input type="radio" value="paypal" name="payment_method" id="paypal"  checked="checked"  class="radio">
+                                        <label class="biglabel" for="paypal">
+                                            <img src="/static/images/icons/payments-cards/png/visa5.png">
+                                            <img src="/static/images/icons/payments-cards/png/mastercard5.png">
+                                            <img src="/static/images/icons/payments-cards/png/american16.png">
+                                            Vía paypal
+                                        </label> 
+
+                                        <input type="radio" value="conecta" name="payment_method" id="conecta" class="radio">
+                                        <label class="biglabel" for="conecta">
+                                            <img src="/static/images/icons/payments-cards/png/oxxo.png">
+                                            Vía Oxxo
+                                        </label> 
+                                    </td>
                                 </tr>
                             </tbody>
 
                         </table>
+
+                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
+
+                        <input type="submit" value="Confirmar orden" class="niceButton right medium " />
 
                     {% elif step == "order" %}
                         
