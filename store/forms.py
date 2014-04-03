@@ -21,6 +21,13 @@ class AddressPedidoForm(forms.ModelForm):
         model = Pedido
         fields = ('custom','fac_nombre','fac_calle','fac_colonia','fac_cp','fac_ciudad','fac_estado','fac_pais','envio_nombre','envio_calle','envio_colonia','envio_cp','envio_ciudad','envio_estado','envio_pais')
 
+class PaymentPedidoForm(forms.ModelForm):
+
+    class Meta:
+        model = Pedido
+        fields = ('custom','payment','payment_id','payment_uri','payment_text','payment_info','shipping','shipping_id','shipping_uri','shipping_text','shipping_info')
+
+
 
 class UniqueCustomCode(forms.CharField):
     """

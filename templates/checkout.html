@@ -39,7 +39,7 @@
                         </div>
                         
                         <div class="fieldWrapper">
-                            {{ formula.productos.errors }}                            
+                            {{ formula.productos.errors }} 
                             {{ formula.comprador.errors }}
                         </div>
 
@@ -264,7 +264,7 @@
 
                         <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
 
-                        <input type="submit" value="Confirmar orden" class="niceButton right medium " />
+                        <input type="submit" value="Confirmar direcciones" class="niceButton right medium " />
 
                     {% elif step == "payment" %}
 
@@ -274,7 +274,7 @@
                             <tbody>
 
                                 <tr>
-                                    <td><input type="radio" value="estandar" name="shipping_method" id="shipping" checked="checked" class="radio">
+                                    <td><input type="radio" value="estandar" name="shipping" id="shipping" checked="checked" class="radio">
                                         <label class="biglabel" for="shipping">
                                             <img src="/static/images/icons/payments-cards/png/estafeta.png">
 
@@ -294,7 +294,7 @@
 
                                 <tr>
                                     <td>
-                                        <input type="radio" value="paypal" name="payment_method" id="paypal"  checked="checked"  class="radio">
+                                        <input type="radio" value="paypal" name="payment" id="paypal"  checked="checked"  class="radio">
                                         <label class="biglabel" for="paypal">
                                             <img src="/static/images/icons/payments-cards/png/visa5.png">
                                             <img src="/static/images/icons/payments-cards/png/mastercard5.png">
@@ -302,7 +302,7 @@
                                             Vía paypal
                                         </label> 
 
-                                        <input type="radio" value="conecta" name="payment_method" id="conecta" class="radio">
+                                        <input type="radio" value="conecta" name="payment" id="conectaio" class="radio">
                                         <label class="biglabel" for="conecta">
                                             <img src="/static/images/icons/payments-cards/png/oxxo.png">
                                             Vía Oxxo
@@ -315,9 +315,9 @@
 
                         <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
 
-                        <input type="submit" value="Confirmar orden" class="niceButton right medium " />
+                        <input type="submit" value="Pagar pedido" class="niceButton right medium " />
 
-                    {% elif step == "order" %}
+                    {% elif step == "customer" %}
                         
                         {{ form.render }}
 
@@ -350,19 +350,21 @@
                 <p>Dirección de facturacion</p>
 
                 <ul>
-                    <li>{{user.first_name}} {{user.last_name}}</li>
-                    <li>{{user.profile.calle}}</li>
-                    <li>{{user.profile.direccion}} </li>
-                    <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                    <li>{{selfie.fac_nombre}}</li>
+                    <li>{{selfie.fac_calle}}</li>
+                    <li>{{selfie.fac_colonia}}</li>
+                    <li>{{selfie.fac_ciudad}}</li>
+                    <li>{{selfie.fac_estado}} {{selfie.fac_cp}}</li>
                 </ul>
             
                 <p>Dirección de envio</p>
 
                 <ul>
-                    <li>{{user.first_name}} {{user.last_name}}</li>
-                    <li>{{user.profile.calle_envio}}</li>
-                    <li>{{user.profile.direccion_envio}} </li>
-                    <li>{{user.profile.ciudad_envio}}, {{user.profile.estado_envio}} {{user.profile.cp_envio}}</li>
+                    <li>{{selfie.envio_nombre}} </li>
+                    <li>{{selfie.envio_calle}}</li>
+                    <li>{{selfie.envio_colonia}} </li>
+                    <li>{{selfie.envio_ciudad}}</li>
+                    <li>{{selfie.envio_estado}} {{selfie.envio_cp}}</li>
                     {{dev}}
                 </ul>
 

@@ -238,6 +238,7 @@ def basket(request,step = False):
                 'profile': profile,
                 "step" : paso,
                 "custom" : customcode,
+                "selfie" : pedido,
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
@@ -248,28 +249,30 @@ def basket(request,step = False):
 
             paso = step
             customcode = request.GET["custom"]
-            save = 'finish/?custom='+customcode
+            save = 'payment/?custom='+customcode
 
             pedido = Pedido.objects.get(custom=customcode)     
 
             if request.method == 'POST':
                 request.POST['custom'] = customcode
-                #request.POST['comprador'] = user.id
-                request.POST['fac_pais'] = 'Mexico'
-                request.POST['envio_pais'] = 'Mexico'
+                request.POST['payment_id'] = 'IDDELATPV'
+                request.POST['payment_uri'] = 'uri://tpv'
+                request.POST['shipping_id'] = 'IDDEELENVIO'
+                request.POST['shipping'] = 'uri://shipping'
         
-                formula = AddressPedidoForm(request.POST,instance=pedido)
+                formula = PaymentPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
                     formula.save()
-                    return HttpResponseRedirect('/store/checkout/payment/?custom='+customcode)
+                    return HttpResponseRedirect('/store/checkout/customer/?custom='+customcode)
             else:
-                formula = AddressPedidoForm(instance=pedido)       
+                formula = PaymentPedidoForm(instance=pedido)       
 
             data = { 
                 "user": user,
                 'profile': profile,
                 "step" : paso,
                 "custom" : customcode,
+                "selfie" : pedido,
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
