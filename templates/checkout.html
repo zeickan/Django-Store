@@ -105,6 +105,8 @@
 
                         <input type="submit" value="Confirmar orden" class="niceButton right medium " />
 
+                        </form>
+
                     {% elif step == "address" %}
 
                         <table class="nicetable">
@@ -266,6 +268,8 @@
 
                         <input type="submit" value="Confirmar direcciones" class="niceButton right medium " />
 
+                        </form>
+
                     {% elif step == "payment" %}
 
                         <table class="nicetable payment">
@@ -302,8 +306,8 @@
                                             Vía paypal
                                         </label> 
 
-                                        <input type="radio" value="conecta" name="payment" id="conectaio" class="radio">
-                                        <label class="biglabel" for="conecta">
+                                        <input type="radio" value="conectaio" name="payment" id="conectaio" class="radio">
+                                        <label class="biglabel" for="conectaio">
                                             <img src="/static/images/icons/payments-cards/png/oxxo.png">
                                             Vía Oxxo
                                         </label> 
@@ -317,9 +321,40 @@
 
                         <input type="submit" value="Pagar pedido" class="niceButton right medium " />
 
+                        </form>
+
                     {% elif step == "customer" %}
+
+                        </form>
                         
-                        {{ form.render }}
+                        <table class="nicetable payment">
+                            <caption>Metodo de envio</caption>
+
+                            <tbody>
+
+                                <tr>
+                                    <td><input type="radio" value="estandar" name="shipping" id="shipping" checked="checked" class="radio">
+                                        <label class="biglabel" for="shipping">
+                                            <img src="/static/images/icons/payments-cards/png/estafeta.png">
+
+                                            Metodo de envio estandar por Estafeta - $199.00
+                                            
+                                        </label> 
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        {% if payment_method == "conectaio" %}
+
+                            {{ checkout }}
+
+                        {% else %}
+
+                            {{ checkout.render }}
+
+                        {% endif %}
 
                     {% endif %}
 
@@ -328,7 +363,7 @@
                                     
                             
              
-                    </form>
+                    
                     
 
                 </div>

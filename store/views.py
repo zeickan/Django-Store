@@ -17,8 +17,10 @@ from store.functions import random_generator
 from decimal import Decimal
 
 # Other Apps
+import conekta
 from paypal.standard.forms import PayPalPaymentsForm
 import string
+import json
 #URL SITE 
 
 SITE_URL = settings.SITE_URL
@@ -258,7 +260,7 @@ def basket(request,step = False):
                 request.POST['payment_id'] = 'IDDELATPV'
                 request.POST['payment_uri'] = 'uri://tpv'
                 request.POST['shipping_id'] = 'IDDEELENVIO'
-                request.POST['shipping'] = 'uri://shipping'
+                request.POST['shipping_uri'] = 'uri://shipping'
         
                 formula = PaymentPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
@@ -279,6 +281,79 @@ def basket(request,step = False):
                 "debug" : request.GET,
             }
 
+        elif step == "customer":
+
+            paso = step
+            customcode = request.GET["custom"]
+            save = 'customer/?custom='+customcode
+
+            pedido = Pedido.objects.get(custom=customcode)     
+
+
+            if pedido.payment == 'paypal':
+
+                paypal_dict = {
+                    "business": "paypal-facilitator@zeickan.com",
+                    "amount": pedido.total,
+                    "currency_code": "MXN",
+                    "item_name": "Compra",
+                    "invoice": customcode,
+                    "notify_url": SITE_URL+"/basket/request/ipn/notify/",
+                    "return_url": SITE_URL+"/basket/return/",
+                    "cancel_return": SITE_URL+"/basket/return/",
+                }
+
+                checkout = PayPalPaymentsForm(initial=paypal_dict)
+
+            elif pedido.payment == "conectaio":
+
+                conekta.api_key = 'key_hq25ksDD9j3Gyag4'
+
+                total = pedido.total
+
+                metainfo = {
+                    "description": "ORDEN #"+customcode,
+                    "amount": total.replace(".",""),
+                    "currency": "MXN",
+                    "reference_id": customcode,
+                    "cash": {
+                        "type": "oxxo"
+                    },
+                    "details": {
+                        "name": user.first_name+" "+user.last_name,
+                        "email": user.email,
+                        "phone": "403-342-0642"
+                    }
+                }
+
+
+                charge = conekta.Charge.create(metainfo)
+
+
+                response = charge.payment_method['barcode_url']
+
+                checkout = response
+
+            else: 
+
+                checkout = False
+
+
+
+            data = { 
+                "user": user,
+                'profile': profile,
+                "step" : paso,
+                "custom" : customcode,
+                "selfie" : pedido,
+                "save" : save,
+                "payment_method" : pedido.payment,
+                #"formula" : formula,
+                "checkout" : checkout,
+                "items" : pedido,
+                "debug" : metainfo,
+            }
+
         else:
             paso = step
             save = 'payment'
@@ -286,21 +361,6 @@ def basket(request,step = False):
 
 
             data = { }
-
-        """
-                paypal_dict = {
-                    "business": "paypal-facilitator@zeickan.com",
-                    "amount": total,
-                    "currency_code": "MXN",
-                    "item_name": "Compra",
-                    "invoice": "0001-32-0001",
-                    "notify_url": SITE_URL+"/basket/request/ipn/notify/",
-                    "return_url": SITE_URL+"/basket/return/",
-                    "cancel_return": SITE_URL+"/basket/return/",
-                }
-
-                form = PayPalPaymentsForm(initial=paypal_dict)
-        """
 
         return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 

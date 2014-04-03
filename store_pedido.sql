@@ -57,7 +57,7 @@ CREATE TABLE `store_pedido` (
   `shipping_text` tinytext,
   `shipping_info` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `store_pedido`
