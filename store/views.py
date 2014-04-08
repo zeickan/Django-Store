@@ -21,6 +21,7 @@ import conekta
 from paypal.standard.forms import PayPalPaymentsForm
 import string
 import json
+
 #URL SITE 
 
 SITE_URL = settings.SITE_URL
@@ -210,7 +211,6 @@ def basket(request,step = False):
                "step" : paso,
                "custom" : custom,
                "save" : save,
-               "debug" : request.GET
             }
 
         elif step == "address":
@@ -244,7 +244,6 @@ def basket(request,step = False):
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
-                "debug" : request.GET,
             }
 
         elif step == "payment":
@@ -278,7 +277,6 @@ def basket(request,step = False):
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
-                "debug" : request.GET,
             }
 
         elif step == "customer":
@@ -307,30 +305,50 @@ def basket(request,step = False):
 
             elif pedido.payment == "conectaio":
 
-                conekta.api_key = 'key_hq25ksDD9j3Gyag4'
+                if pedido.payment_info == "":
 
-                total = pedido.total
+                    conekta.api_key = 'key_hq25ksDD9j3Gyag4'
 
-                metainfo = {
-                    "description": "ORDEN #"+customcode,
-                    "amount": total.replace(".",""),
-                    "currency": "MXN",
-                    "reference_id": customcode,
-                    "cash": {
-                        "type": "oxxo"
-                    },
-                    "details": {
-                        "name": user.first_name+" "+user.last_name,
-                        "email": user.email,
-                        "phone": "403-342-0642"
+                    total = pedido.total
+
+                    metainfo = {
+                        "description": "ORDEN #"+customcode,
+                        "amount": total.replace(".",""),
+                        "currency": "MXN",
+                        "reference_id": customcode,
+                        "cash": {
+                            "type": "oxxo"
+                        },
+                        "details": {
+                            "name": user.first_name+" "+user.last_name,
+                            "email": user.email,
+                            "phone": "403-342-0642"
+                        }
                     }
-                }
 
 
-                charge = conekta.Charge.create(metainfo)
+                    charge = conekta.Charge.create(metainfo)
 
+                    response = charge.payment_method
 
-                response = charge.payment_method['barcode_url']
+                    bar = {}
+
+                    bar['custom'] = customcode
+                    bar['payment'] = pedido.payment
+                    bar['payment_id'] = response['barcode']
+                    bar['payment_uri'] = response['barcode_url']
+                    bar['payment_text'] = response['expiry_date']
+                    bar['payment_info'] = json.dumps(response)
+                    bar['shipping_id'] = '00000'
+                    bar['shipping_uri'] = 'uri://'
+            
+                    update = PaymentPedidoForm(bar,instance=pedido)
+                    if update.is_valid():
+                        update.save()
+
+                else :
+
+                    response = { 'barcode': pedido.payment_id, 'barcode_url': pedido.payment_uri }
 
                 checkout = response
 
@@ -351,7 +369,7 @@ def basket(request,step = False):
                 #"formula" : formula,
                 "checkout" : checkout,
                 "items" : pedido,
-                "debug" : metainfo,
+                
             }
 
         else:

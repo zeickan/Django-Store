@@ -1,0 +1,25 @@
+
+
+.breadcrumbs {
+	display:none;
+}
+
+.sidebar p {
+
+}
+
+.sidebar ul {
+	float: left;
+	padding-right: 1.4em;
+	font-size: 13px;
+	font-family: helvetica,"lucida grande",sans-serif;
+}
+
+footer, .footer  {
+	display: none;
+}
+
+.nicetable {
+	font-size: 13px;
+	font-family: helvetica,"lucida grande",sans-serif;
+}

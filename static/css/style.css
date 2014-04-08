@@ -13,6 +13,10 @@ body.fondo {
 	background-size: cover;
 }
 
+.clear {
+	clear: both;
+}
+
 .debug {
 	position: absolute;
 	right: 0px;
@@ -27,6 +31,19 @@ body.fondo {
 
 .border-less {
 	border:0px solid !important;
+}
+
+.paymentcode {
+	text-align: center;
+	color:#000;
+
+}
+
+.paymentcode img {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+	padding: 0px !important;
 }
 
 .seccion  {
@@ -457,6 +474,11 @@ input, select, textarea {
 	color:#666;	
 	box-shadow: none;
 }
+
+.nicetable tbody tr td input[type="image"] { 
+	border:0px solid #000 !important;
+}
+
 .nicetable tbody tr td input.mini {
 	width:50px;
 	float: left;
