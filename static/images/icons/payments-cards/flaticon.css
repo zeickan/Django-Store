@@ -1,0 +1,226 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-alipay:before {
+	content: "\e000";
+}
+.flaticon-amazon3:before {
+	content: "\e001";
+}
+.flaticon-american16:before {
+	content: "\e002";
+}
+.flaticon-asia:before {
+	content: "\e003";
+}
+.flaticon-atos:before {
+	content: "\e004";
+}
+.flaticon-bank8:before {
+	content: "\e005";
+}
+.flaticon-better:before {
+	content: "\e006";
+}
+.flaticon-bips:before {
+	content: "\e007";
+}
+.flaticon-bpay1:before {
+	content: "\e008";
+}
+.flaticon-checkout:before {
+	content: "\e009";
+}
+.flaticon-cirrus1:before {
+	content: "\e00a";
+}
+.flaticon-citibank1:before {
+	content: "\e00b";
+}
+.flaticon-clickandbuy1:before {
+	content: "\e00c";
+}
+.flaticon-credit60:before {
+	content: "\e00d";
+}
+.flaticon-delta:before {
+	content: "\e00e";
+}
+.flaticon-diners:before {
+	content: "\e00f";
+}
+.flaticon-direct2:before {
+	content: "\e010";
+}
+.flaticon-discover1:before {
+	content: "\e011";
+}
+.flaticon-dwolla:before {
+	content: "\e012";
+}
+.flaticon-ebay4:before {
+	content: "\e013";
+}
+.flaticon-eco54:before {
+	content: "\e014";
+}
+.flaticon-electronic54:before {
+	content: "\e015";
+}
+.flaticon-eps7:before {
+	content: "\e016";
+}
+.flaticon-euronet1:before {
+	content: "\e017";
+}
+.flaticon-eway:before {
+	content: "\e018";
+}
+.flaticon-gift54:before {
+	content: "\e019";
+}
+.flaticon-google47:before {
+	content: "\e01a";
+}
+.flaticon-heartland1:before {
+	content: "\e01b";
+}
+.flaticon-hsbc1:before {
+	content: "\e01c";
+}
+.flaticon-izettle1:before {
+	content: "\e01d";
+}
+.flaticon-jcb4:before {
+	content: "\e01e";
+}
+.flaticon-klarna:before {
+	content: "\e01f";
+}
+.flaticon-laser2:before {
+	content: "\e020";
+}
+.flaticon-maestro1:before {
+	content: "\e021";
+}
+.flaticon-mastercard5:before {
+	content: "\e022";
+}
+.flaticon-mondex:before {
+	content: "\e023";
+}
+.flaticon-moneygram:before {
+	content: "\e024";
+}
+.flaticon-neteller:before {
+	content: "\e025";
+}
+.flaticon-ogone1:before {
+	content: "\e026";
+}
+.flaticon-pay5:before {
+	content: "\e027";
+}
+.flaticon-paymate:before {
+	content: "\e028";
+}
+.flaticon-payoneer1:before {
+	content: "\e029";
+}
+.flaticon-paypal11:before {
+	content: "\e02a";
+}
+.flaticon-paysafecard1:before {
+	content: "\e02b";
+}
+.flaticon-payza1:before {
+	content: "\e02c";
+}
+.flaticon-popmoney:before {
+	content: "\e02d";
+}
+.flaticon-realex1:before {
+	content: "\e02e";
+}
+.flaticon-recurly:before {
+	content: "\e02f";
+}
+.flaticon-sage:before {
+	content: "\e030";
+}
+.flaticon-skrill1:before {
+	content: "\e031";
+}
+.flaticon-solo:before {
+	content: "\e032";
+}
+.flaticon-square91:before {
+	content: "\e033";
+}
+.flaticon-stripe2:before {
+	content: "\e034";
+}
+.flaticon-switch16:before {
+	content: "\e035";
+}
+.flaticon-telecheck:before {
+	content: "\e036";
+}
+.flaticon-timwe:before {
+	content: "\e037";
+}
+.flaticon-truste:before {
+	content: "\e038";
+}
+.flaticon-ukash:before {
+	content: "\e039";
+}
+.flaticon-unionpay:before {
+	content: "\e03a";
+}
+.flaticon-verifone:before {
+	content: "\e03b";
+}
+.flaticon-verisign:before {
+	content: "\e03c";
+}
+.flaticon-vindicia:before {
+	content: "\e03d";
+}
+.flaticon-visa5:before {
+	content: "\e03e";
+}
+.flaticon-webmoney1:before {
+	content: "\e03f";
+}
+.flaticon-wepay:before {
+	content: "\e040";
+}
+.flaticon-western1:before {
+	content: "\e041";
+}
+.flaticon-wire:before {
+	content: "\e042";
+}
+.flaticon-wirecard1:before {
+	content: "\e043";
+}
+.flaticon-worldpay1:before {
+	content: "\e044";
+}
+.flaticon-yandex1:before {
+	content: "\e045";
+}

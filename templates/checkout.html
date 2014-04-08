@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}Red Carpet : Caja{% endblock %}
-{% block debug %}<div class="debug">{{debug}}</div>{% endblock %}
+{% block debug %}{% if debug %}<div class="debug"><pre>{{debug}}</pre></div>{% endif %}{% endblock %}
 {% block content %}
 
 
@@ -39,7 +39,7 @@
                         </div>
                         
                         <div class="fieldWrapper">
-                            {{ formula.productos.errors }}                            
+                            {{ formula.productos.errors }} 
                             {{ formula.comprador.errors }}
                         </div>
 
@@ -104,6 +104,8 @@
                         <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Seguir comprando</a>
 
                         <input type="submit" value="Confirmar orden" class="niceButton right medium " />
+
+                        </form>
 
                     {% elif step == "address" %}
 
@@ -262,39 +264,160 @@
 
                         </table>
 
-                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Seguir comprando</a>
+                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
 
-                        <input type="submit" value="Confirmar orden" class="niceButton right medium " />
+                        <input type="submit" value="Confirmar direcciones" class="niceButton right medium " />
+
+                        </form>
 
                     {% elif step == "payment" %}
 
-                        <table class="nicetable">
+                        <table class="nicetable payment">
                             <caption>Metodo de envio</caption>
 
                             <tbody>
 
                                 <tr>
-                                    <td><input type="radio" value="estandar" name="shipping_method" id="shipping" checked="checked"><label for="shipping">Metodo de envio estandar DHL - $199.00</label> </td>
+                                    <td><input type="radio" value="estandar" name="shipping" id="shipping" checked="checked" class="radio">
+                                        <label class="biglabel" for="shipping">
+                                            <img src="/static/images/icons/payments-cards/png/estafeta.png">
+
+                                            Metodo de envio estandar por Estafeta - $199.00
+                                            
+                                        </label> 
+                                    </td>
                                 </tr>
                             </tbody>
 
                         </table>
 
-                        <table class="nicetable">
+                        <table class="nicetable payment">
                             <caption>Metodo de pago</caption>
 
                             <tbody>
 
                                 <tr>
-                                    <td><input type="radio" value="estandar" name="payment_method" id="paypal"  checked="checked"><label for="paypal">Paypal</label> </td>
+                                    <td>
+                                        <input type="radio" value="paypal" name="payment" id="paypal"  checked="checked"  class="radio">
+                                        <label class="biglabel" for="paypal">
+                                            <img src="/static/images/icons/payments-cards/png/visa5.png">
+                                            <img src="/static/images/icons/payments-cards/png/mastercard5.png">
+                                            <img src="/static/images/icons/payments-cards/png/american16.png">
+                                            Vía paypal
+                                        </label> 
+
+                                        <input type="radio" value="conectaio" name="payment" id="conectaio" class="radio">
+                                        <label class="biglabel" for="conectaio">
+                                            <img src="/static/images/icons/payments-cards/png/oxxo.png">
+                                            Vía Oxxo
+                                        </label> 
+                                    </td>
                                 </tr>
                             </tbody>
 
                         </table>
 
-                    {% elif step == "order" %}
-                        
-                        {{ form.render }}
+                        <a href="{{ BASE_URL }}/store/" class="niceButton left medium">Cancelar pedido</a>
+
+                        <input type="submit" value="Pagar pedido" class="niceButton right medium " />
+
+                        </form>
+
+                    {% elif step == "customer" %}
+
+                        </form>
+
+                        <table class="nicetable">
+                            <caption>Recibo de pago</caption>
+
+                            <thead>
+                                <tr>
+                                    <th colspan="2" width="65%">Resumen de pago</th>
+                                    <th>Costo</th>
+                                    <th>Envio</th>
+                                    <th>Sub-total</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">ID de operacion: #{{selfie.id}}</td>
+                                    <td>{{selfie.subtotal}}</td>
+                                    <td>199.00</td>
+                                    <td>{{selfie.total}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">Descuento</td>                                        
+                                    <td>0</td>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="4"></th>
+                                    <th>Total</th>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>{{selfie.total}}</td>
+                                </tr>
+
+
+                            </thead>
+
+
+
+                        {% if payment_method == "conectaio" %}
+
+                            <tbody>
+
+                                <tr>
+                                    <td colspan="5">
+                                        <p>La compra se encuentra en estado pendiente.</p>
+
+                                        <p>Imprime y presenta este comprobante en cualquier tienda OXXO del país para realizar el pago por tu compra.</p>
+
+                                        <p>El presente recibo solo es valido para el pago que estas efectúando y recuerda que se acreditara en nuestra cuenta 24 hrs despues de haberse realizado. Cualquier aclaración sobre tu compra cominicate a nuestro correo ventas@redcarpetmanicure.com.mx Es nuestra responsabilidad aclarar cualquier duda o reclamo sobre esta compra.</p>
+
+                                        <p>El presente recibo no podrá ser utilizado luego de la fecha de vencimiento</p>
+
+                                        <p class="paymentcode">
+                                            <img src="/static/images/payment-oxxo.png"><br>
+                                            <img src="{{ checkout.barcode_url }}" width="400">
+                                            <strong>{{ checkout.barcode }}</strong>
+                                        </p>
+
+                                        <p>(*) El presente recibo debe imprimirse de forma legible y clara, preferentemente con impresora láser y conservarse en buen estado ni tachaduras y/o dobleces. De lo contrario, puede que la tienda donde intentes efecturar tu pago, no pueda capturarlo.</p>
+
+                                        <p>(*) La tienda donde se efectúe el pago cobrara $8 pesos en concepto de recepcion de cobranza</p>
+
+
+                                    </td>
+                                </tr>
+                            </tbody>                            
+
+                        {% else %}
+
+                            <tbody>
+
+                                <tr>
+                                    <td colspan="5">
+                                        <p>La compra se encuentra en estado pendiente.</p>
+
+                                        <p>Realiza tu pago usando vía paypal</p>
+
+                                        <img src="/static/images/paypal-cards.gif" class="left">
+
+
+
+                                        {{ checkout.render }}
+                                        
+
+                                        <p class="clear">(*) No es necesario imprimir este recibo, si deseas puedes verlo nuevamente entrando a tu panel y desde ahi tu lista de pedidos.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>        
+
+                        {% endif %}
+
+                    </table>
 
                     {% endif %}
 
@@ -303,7 +426,7 @@
                                     
                             
              
-                    </form>
+                    
                     
 
                 </div>
@@ -322,35 +445,42 @@
             <div class="sidebar">
                 <h3>Detalles del pedido</h3>
 
-                <p>Dirección de facturacion</p>
+                
+                <ul><p>Dirección de facturacion</p>
 
-                <ul>
-                    <li>{{user.first_name}} {{user.last_name}}</li>
-                    <li>{{user.profile.calle}}</li>
-                    <li>{{user.profile.direccion}} </li>
-                    <li>{{user.profile.ciudad}}, {{user.profile.estado}} {{user.profile.cp}}</li>
+                    <li>{{selfie.fac_nombre}}</li>
+                    <li>{{selfie.fac_calle}}</li>
+                    <li>{{selfie.fac_colonia}}</li>
+                    <li>{{selfie.fac_ciudad}}</li>
+                    <li>{{selfie.fac_estado}} {{selfie.fac_cp}}</li>
                 </ul>
             
-                <p>Dirección de envio</p>
+                
 
-                <ul>
-                    <li>{{user.first_name}} {{user.last_name}}</li>
-                    <li>{{user.profile.calle_envio}}</li>
-                    <li>{{user.profile.direccion_envio}} </li>
-                    <li>{{user.profile.ciudad_envio}}, {{user.profile.estado_envio}} {{user.profile.cp_envio}}</li>
+                <ul><p>Dirección de envio</p>
+                    <li>{{selfie.envio_nombre}} </li>
+                    <li>{{selfie.envio_calle}}</li>
+                    <li>{{selfie.envio_colonia}} </li>
+                    <li>{{selfie.envio_ciudad}}</li>
+                    <li>{{selfie.envio_estado}} {{selfie.envio_cp}}</li>
                     {{dev}}
                 </ul>
 
-                <p>Metodo de envio</p>
+                
+                <ul><p>Metodo de envio</p>
 
-                <ul>
-                    <li>Envio nacional - DHL Standard </li>
+                    <li>Envio nacional DHL - {{selfie.shipping}} </li>
                 </ul>
 
-                <p>Información de pago</p>
+               
 
-                <ul>
-                    <li>Paypal</li>
+                <ul> <p>Información de pago</p>
+                    <li>
+                        {% if selfie.payment == "conectaio" %}
+                            OXXO
+                        {% else %}
+                            {{selfie.payment}}
+                        {% endif %}</li>
                 </ul>
 
 

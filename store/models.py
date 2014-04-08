@@ -131,6 +131,18 @@ class Pedido(models.Model):
     envio_pais = models.CharField(blank=True,null=True,max_length=100)
     envio_telefono = models.CharField(blank=True,null=True,max_length=50)
 
+    payment = models.CharField(blank=True,null=True,max_length=50)
+    payment_id = models.CharField(blank=True,null=True,max_length=255)
+    payment_uri = models.CharField(blank=True,null=True,max_length=255)
+    payment_text = models.CharField(blank=True,null=True,max_length=255)
+    payment_info = models.CharField(blank=True,null=True,max_length=255)
+
+    shipping = models.CharField(blank=True,null=True,max_length=50)
+    shipping_id = models.CharField(blank=True,null=True,max_length=255)
+    shipping_uri = models.CharField(blank=True,null=True,max_length=255)
+    shipping_text = models.CharField(blank=True,null=True,max_length=255)
+    shipping_info = models.CharField(blank=True,null=True,max_length=255)
+
     def __unicode__(self):
         return "%s" % self.comprador
 

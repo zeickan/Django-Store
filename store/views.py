@@ -17,8 +17,11 @@ from store.functions import random_generator
 from decimal import Decimal
 
 # Other Apps
+import conekta
 from paypal.standard.forms import PayPalPaymentsForm
 import string
+import json
+
 #URL SITE 
 
 SITE_URL = settings.SITE_URL
@@ -208,7 +211,6 @@ def basket(request,step = False):
                "step" : paso,
                "custom" : custom,
                "save" : save,
-               "debug" : request.GET
             }
 
         elif step == "address":
@@ -238,42 +240,136 @@ def basket(request,step = False):
                 'profile': profile,
                 "step" : paso,
                 "custom" : customcode,
+                "selfie" : pedido,
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
-                "debug" : request.GET,
             }
 
         elif step == "payment":
 
             paso = step
             customcode = request.GET["custom"]
-            save = 'finish/?custom='+customcode
+            save = 'payment/?custom='+customcode
 
             pedido = Pedido.objects.get(custom=customcode)     
 
             if request.method == 'POST':
                 request.POST['custom'] = customcode
-                #request.POST['comprador'] = user.id
-                request.POST['fac_pais'] = 'Mexico'
-                request.POST['envio_pais'] = 'Mexico'
+                request.POST['payment_id'] = 'IDDELATPV'
+                request.POST['payment_uri'] = 'uri://tpv'
+                request.POST['shipping_id'] = 'IDDEELENVIO'
+                request.POST['shipping_uri'] = 'uri://shipping'
         
-                formula = AddressPedidoForm(request.POST,instance=pedido)
+                formula = PaymentPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
                     formula.save()
-                    return HttpResponseRedirect('/store/checkout/payment/?custom='+customcode)
+                    return HttpResponseRedirect('/store/checkout/customer/?custom='+customcode)
             else:
-                formula = AddressPedidoForm(instance=pedido)       
+                formula = PaymentPedidoForm(instance=pedido)       
 
             data = { 
                 "user": user,
                 'profile': profile,
                 "step" : paso,
                 "custom" : customcode,
+                "selfie" : pedido,
                 "save" : save,
                 "formula" : formula,
                 "items" : pedido,
-                "debug" : request.GET,
+            }
+
+        elif step == "customer":
+
+            paso = step
+            customcode = request.GET["custom"]
+            save = 'customer/?custom='+customcode
+
+            pedido = Pedido.objects.get(custom=customcode)     
+
+
+            if pedido.payment == 'paypal':
+
+                paypal_dict = {
+                    "business": "paypal-facilitator@zeickan.com",
+                    "amount": pedido.total,
+                    "currency_code": "MXN",
+                    "item_name": "Compra",
+                    "invoice": customcode,
+                    "notify_url": SITE_URL+"/basket/request/ipn/notify/",
+                    "return_url": SITE_URL+"/basket/return/",
+                    "cancel_return": SITE_URL+"/basket/return/",
+                }
+
+                checkout = PayPalPaymentsForm(initial=paypal_dict)
+
+            elif pedido.payment == "conectaio":
+
+                if pedido.payment_info == "":
+
+                    conekta.api_key = 'key_hq25ksDD9j3Gyag4'
+
+                    total = pedido.total
+
+                    metainfo = {
+                        "description": "ORDEN #"+customcode,
+                        "amount": total.replace(".",""),
+                        "currency": "MXN",
+                        "reference_id": customcode,
+                        "cash": {
+                            "type": "oxxo"
+                        },
+                        "details": {
+                            "name": user.first_name+" "+user.last_name,
+                            "email": user.email,
+                            "phone": "403-342-0642"
+                        }
+                    }
+
+
+                    charge = conekta.Charge.create(metainfo)
+
+                    response = charge.payment_method
+
+                    bar = {}
+
+                    bar['custom'] = customcode
+                    bar['payment'] = pedido.payment
+                    bar['payment_id'] = response['barcode']
+                    bar['payment_uri'] = response['barcode_url']
+                    bar['payment_text'] = response['expiry_date']
+                    bar['payment_info'] = json.dumps(response)
+                    bar['shipping_id'] = '00000'
+                    bar['shipping_uri'] = 'uri://'
+            
+                    update = PaymentPedidoForm(bar,instance=pedido)
+                    if update.is_valid():
+                        update.save()
+
+                else :
+
+                    response = { 'barcode': pedido.payment_id, 'barcode_url': pedido.payment_uri }
+
+                checkout = response
+
+            else: 
+
+                checkout = False
+
+
+
+            data = { 
+                "user": user,
+                'profile': profile,
+                "step" : paso,
+                "custom" : customcode,
+                "selfie" : pedido,
+                "save" : save,
+                "payment_method" : pedido.payment,
+                #"formula" : formula,
+                "checkout" : checkout,
+                "items" : pedido,
+                
             }
 
         else:
@@ -283,21 +379,6 @@ def basket(request,step = False):
 
 
             data = { }
-
-        """
-                paypal_dict = {
-                    "business": "paypal-facilitator@zeickan.com",
-                    "amount": total,
-                    "currency_code": "MXN",
-                    "item_name": "Compra",
-                    "invoice": "0001-32-0001",
-                    "notify_url": SITE_URL+"/basket/request/ipn/notify/",
-                    "return_url": SITE_URL+"/basket/return/",
-                    "cancel_return": SITE_URL+"/basket/return/",
-                }
-
-                form = PayPalPaymentsForm(initial=paypal_dict)
-        """
 
         return render_to_response("checkout.html", context_instance=RequestContext(request,data))
 
