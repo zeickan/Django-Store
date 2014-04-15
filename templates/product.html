@@ -20,7 +20,7 @@
         <ul class="breadcrumbs">
           <li><a href="{{ BASE_URL }}">Inicio</a></li>
           <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
-          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+          {% if actual %}<li class="current"><a href="#">{% for items in productos %}{{items.nombre}}{% endfor %}</a></li>{% endif %}
         </ul>
 
       <div class="row">
@@ -37,7 +37,8 @@
                 </p>
 
                 <p>
-                    <a href="{{ BASE_URL }}/store/checkout/" class="medium expand button round">Pasar a pagar</a>
+                    <a href="{{ BASE_URL }}/store/checkout/" class="niceButton left medium">Pasar a pagar</a>
+                    <div class="clear"></div>
                 </p>
 
                 {{dev}}
@@ -83,9 +84,10 @@
                         <div>
                           <h3><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h3>
                           <p>{{ items.descripcion }}</p>
-                          <p>Colores: {% for obj in items.colores.all %} {{obj.color}} {% endfor %}</p>
+                         
                           <h4>${{items.precio}}</h4>
-                          <a href="#" rel="{{items.id}}" class="button round small">Agregar al carrito</a>
+                          <a href="#" rel="{{items.id}}" class="addtocar niceButton left medium">Agregar al carrito</a>
+                          <div class="clear"></div>
                         </div>
                     </div>
                 </div>

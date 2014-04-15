@@ -78,13 +78,17 @@ def getProducts(request,slug=False):
 
     colores = Colores.objects.filter(temporada=True)
 
-    
+    if showCategoria:
+        actualstr = showCategoria.replace("-"," ")
+    else:
+        actualstr = ''
+
     template = "store.html"
     data = {'colores' : colores,
             "productos":productos,
             "basket": basket,
             "current_basket": current,
-            "actual": showCategoria,
+            "actual": actualstr,
             "current": categoryName,
             "dev": dev }
     return render_to_response(template, context_instance=RequestContext(request,data))
@@ -446,7 +450,7 @@ def register(request):
 
 
 
-def test(request):
+def pruebas(request):
 
     if request.session.get('cesta', False):
         var = 'empty'

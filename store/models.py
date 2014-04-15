@@ -87,7 +87,7 @@ class Colores(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(blank=False, max_length=100)
-    descripcion = models.TextField(blank=False)
+    descripcion = HTMLField()
     categoria = models.ForeignKey(Categoria)
     imagen = models.FileField(blank=True,upload_to='documents/%Y/%m/%d')
     colores = models.ManyToManyField(Colores,blank=True,null=True)
