@@ -250,13 +250,18 @@ input, select, textarea {
 .formula input.texto {
 	background: #FFF;
 	border:3px solid #DDD;
-	padding:1.1em 0.8em !important;
-	outline: none;
+	padding: 12px;
+	color: #333;
+	font-size: 14px;
+	height: 3em;
+}
+
+.formula input.texto[type="password"] {
+	padding: 0px 15px !important;
 }
 
 
 .formula input.texto:focus {
-	outline: none !important;
 	border-color:#47bac1;
 }
 
