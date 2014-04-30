@@ -84,6 +84,15 @@ body.fondo {
 
 }
 
+.footer a {
+	color: #FFF;
+}
+
+.footer a:hover {
+	color: #f14c2e;
+	text-decoration: underline;
+}
+
 .footer.gun {
 	position: absolute;
 	bottom: 0;
@@ -104,20 +113,19 @@ body.fondo {
 }
 
 
-.footer .social {
+.footer .socialnetwork {
 	list-style: none;
 	padding-top: 0.5em;
 }
 
-.footer .social li {
+.footer .socialnetwork li {
 	float: left; margin-right: 3px;
 }
 
-.footer .social li a {
+.footer .socialnetwork li a {
 	display: block;
 	width:32px;
 	height: 32px;
-	background: red;
 }
 
 .footer .social li a.twitter {

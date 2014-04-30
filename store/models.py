@@ -156,7 +156,12 @@ def show_me_the_money(sender, **kwargs):
 
     # Undertake some action depending upon `ipn_obj`.
     if ipn_obj.payment_status == "Completed":
-        Pedido.objects.update(comprador=ipn_obj.payer_id)
+        
+        customcode = ipn_obj.custom
+        Pedido.objects.filter(custom=customcode).update(paid=True)
+
+        #Entry.objects.filter(pub_date__year=2007).update(headline='Everything is the same')
+        #Pedido.objects.update(comprador=ipn_obj.payer_id,)
 
 
 payment_was_successful.connect(show_me_the_money)
