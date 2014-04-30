@@ -84,6 +84,15 @@ body.fondo {
 
 }
 
+.footer a {
+	color: #FFF;
+}
+
+.footer a:hover {
+	color: #f14c2e;
+	text-decoration: underline;
+}
+
 .footer.gun {
 	position: absolute;
 	bottom: 0;
