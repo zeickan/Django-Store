@@ -55,6 +55,14 @@
                         </p>
                     {% endfor %}
 
+                    <p class="fieldWrapper">
+                            
+                            <label for="aviso">Al crear cuenta aceptas nuestro <a href="{{ BASE_URL }}/static/file/AvisoPrivacidad.pdf" target="_blank">Aviso de privacidad</a></label> 
+
+                            <input type="checkbox" name="aviso" id="aviso" value="1"> <small>He leido y acepto el aviso de privacidad</small> 
+
+                    </p>
+
                     <input type="submit" class="boton" value="Crear cuenta">
                 </form>
 
