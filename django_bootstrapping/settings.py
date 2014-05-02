@@ -1,6 +1,6 @@
 # Django settings for django_bootstrapping project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -26,7 +26,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['androsromo.com']
+ALLOWED_HOSTS = ['red.androsromo.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -63,32 +63,33 @@ USE_TZ = True
 #MEDIA_ROOT = '/srv/www/django/media/' # Servidor old
 #MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
 #MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
-MEDIA_ROOT = '/home/androsromo/webapps/store/django_store/media/'
-
+#MEDIA_ROOT = '/home/androsromo/webapps/store/django_store/media/'
+MEDIA_ROOT = '/home/androsromo/webapps/storefiles/'
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = '/media/'
+MEDIA_URL = 'http://red.androsromo.com/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/home/androsromo/webapps/store/django_store/static/'
+STATIC_ROOT = '/home/androsromo/webapps/storestatic/'
 #STATIC_ROOT = '/Users/imac1/Developer/Django-Store/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 #STATIC_URL = 'http://py.androsromo.com/static/'
-STATIC_URL = '/static/'
+STATIC_URL = 'http://red.androsromo.com/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     #'/Applications/XAMPP/htdocs/Py/Store/static/',
     #'/Users/imac1/Developer/Django-Store/static/'
     #'/Users/imac1/Developer/Store/static/',
+    "/home/androsromo/webapps/store/django_store/static/",
     "/home/androsromo/static_files/store/static/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
