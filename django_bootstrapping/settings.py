@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_store',                      # Or path to database file if using sqlite3.
+        'NAME': 'store',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'dev',
         'PASSWORD': 'qwe8521z_dev',
@@ -26,7 +26,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['androsromo.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -40,7 +40,9 @@ TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'es-MX'
 
 #SITE_URL = 'http://py.androsromo.com'
-SITE_URL = 'http://127.0.0.1:8000'
+#SITE_URL = 'http://127.0.0.1:8000'
+SITE_URL = 'http://red.androsromo.com'
+
 
 SITE_ID = 1
 
@@ -59,8 +61,10 @@ USE_TZ = True
 # Example: "/var/www/example.com/media/"
 
 #MEDIA_ROOT = '/srv/www/django/media/' # Servidor old
-MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
+#MEDIA_ROOT = '/Users/imac1/Developer/Store/media/' # iMac
 #MEDIA_ROOT = '/Applications/XAMPP/htdocs/Py/Store/media/' # Macbook
+MEDIA_ROOT = '/home/androsromo/webapps/store/django_store/media/'
+
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -72,7 +76,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/static/'
+STATIC_ROOT = '/home/androsromo/webapps/store/django_store/static/'
 #STATIC_ROOT = '/Users/imac1/Developer/Django-Store/static/'
 
 # URL prefix for static files.
@@ -82,9 +86,10 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/Applications/XAMPP/htdocs/Py/Store/static/',
+    #'/Applications/XAMPP/htdocs/Py/Store/static/',
     #'/Users/imac1/Developer/Django-Store/static/'
-    '/Users/imac1/Developer/Store/static/',
+    #'/Users/imac1/Developer/Store/static/',
+    "/home/androsromo/static_files/store/static/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -124,9 +129,10 @@ ROOT_URLCONF = 'django_bootstrapping.urls'
 WSGI_APPLICATION = 'django_bootstrapping.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Applications/XAMPP/htdocs/Py/Store/templates/',
+    #'/Applications/XAMPP/htdocs/Py/Store/templates/',
     #'/srv/www/django/templates/',
-    '/Users/imac1/Developer/Store/templates/',
+    #'/Users/imac1/Developer/Store/templates/',
+    '/home/androsromo/webapps/store/django_store/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
