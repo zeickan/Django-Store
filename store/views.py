@@ -187,13 +187,13 @@ def basket(request,step = False):
                 sumar.append(precio)
 
             subtotal = sum(sumar)
-            total = subtotal+199
+            total = subtotal+150
 
             if request.method == 'POST':
                 request.POST['custom'] = custom
                 request.POST["comprador"] = user.id
                 request.POST["subtotal"] = subtotal
-                request.POST["envio"] = 199
+                request.POST["envio"] = 150
                 request.POST["total"] = total
                 formula = ProPedidoForm(request.POST)
                 if formula.is_valid():
@@ -294,15 +294,18 @@ def basket(request,step = False):
 
             if pedido.payment == 'paypal':
 
+                itemname = "Pedido Red Carpet Manicure"
+
                 paypal_dict = {
-                    "business": "paypal-facilitator@zeickan.com",
+                    "business": "ventas@redcarpetmanicure.com.mx",
                     "amount": pedido.total,
                     "currency_code": "MXN",
-                    "item_name": "Compra",
+                    "item_name": itemname,
                     "invoice": customcode,
+                    "custom": customcode,
                     "notify_url": SITE_URL+"/basket/request/ipn/notify/",
                     "return_url": SITE_URL+"/basket/return/",
-                    "cancel_return": SITE_URL+"/basket/return/",
+                    "cancel_return": SITE_URL+"/basket/cancel/",
                 }
 
                 checkout = PayPalPaymentsForm(initial=paypal_dict)
@@ -311,7 +314,7 @@ def basket(request,step = False):
 
                 if pedido.payment_info == "":
 
-                    conekta.api_key = 'key_hq25ksDD9j3Gyag4'
+                    conekta.api_key = 'key_jxAf3ExGqrL6yrsv'
 
                     total = pedido.total
 

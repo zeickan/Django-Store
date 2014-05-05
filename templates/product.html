@@ -85,8 +85,12 @@
                           <h3><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h3>
                           <p>{{ items.descripcion }}</p>
                          
-                          <h4>${{items.precio}}</h4>
+                          <h4>{% if items.precio != 0.00 %}${{items.precio}}{% else %}Proximamente{% endif %}</h4>
+                          {% if items.precio != 0.00 %}
                           <a href="#" rel="{{items.id}}" class="addtocar niceButton left medium">Agregar al carrito</a>
+                          {% endif %}
+
+
                           <div class="clear"></div>
                         </div>
                     </div>

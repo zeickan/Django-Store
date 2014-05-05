@@ -72,7 +72,9 @@
 
                 <div class="large-4 small-6 producto columns">
                     <div class="basket">
-                        <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
+                        {% if items.precio != 0.00 %}
+                            <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
+                        {% endif%}
 
                         <a href="{{ BASE_URL}}/store/product/{{ items.id }}">
                         {% if items.imagen == '' %}
@@ -84,7 +86,7 @@
           
                         <div>
                           <h5><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h5>
-                          <h6 class="subheader">${{items.precio}}</h6>
+                          <h6 class="subheader">{% if items.precio != 0.00 %}${{items.precio}}{% else %}Proximamente{% endif %}</h6>
                           <!-- <a href="#" rel="{{items.id}}" class="button round small">Agregar al carrito</a> -->
                         </div>
                     </div>
