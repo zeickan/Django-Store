@@ -26,7 +26,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['red.androsromo.com']
+ALLOWED_HOSTS = ['redcarpetmanicure.com.mx']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -39,10 +39,7 @@ TIME_ZONE = 'America/Chicago'
 #LANGUAGE_CODE = 'en-US'
 LANGUAGE_CODE = 'es-MX'
 
-#SITE_URL = 'http://py.androsromo.com'
-#SITE_URL = 'http://127.0.0.1:8000'
-SITE_URL = 'http://red.androsromo.com'
-
+SITE_URL = 'http://redcarpetmanicure.com.mx'
 
 SITE_ID = 1
 
@@ -70,7 +67,7 @@ MEDIA_ROOT = '/home/androsromo/webapps/storefiles/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = 'http://red.androsromo.com/media/'
+MEDIA_URL = 'http://redcarpetmanicure.com.mx/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -82,7 +79,7 @@ STATIC_ROOT = '/home/androsromo/webapps/storestatic/'
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 #STATIC_URL = 'http://py.androsromo.com/static/'
-STATIC_URL = 'http://red.androsromo.com/static/'
+STATIC_URL = 'http://redcarpetmanicure.com.mx/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
