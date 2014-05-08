@@ -50,7 +50,15 @@ admin.site.register(Producto,ProductoAdmin)
 
 
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ('comprador','paid')
+    list_display = ('fac_nombre','pub_date','total','payment','shipping_text','paid')
+    search_fields = ('custom',)
+    list_filter  = ('payment','shipping_text','paid')
+
+
+    #readonly_fields = ('fac_nombre', )     
+    #def fac_nombre(self, obj):
+    #    return obj.get_full_name()
+    #fac_nombre.short_description = 'my custom label'
 
 admin.site.register(Pedido,PedidoAdmin)
 
