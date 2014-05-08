@@ -52,13 +52,15 @@ class ProPedidoForm(PedidoForm):
     subtotal = forms.CharField(required=False,max_length=20)
     envio = forms.CharField(required=False,max_length=20)
     total = forms.CharField(required=False,max_length=20)
+    pub_date = forms.DateTimeField()
+    shipping_text = forms.CharField(required=False,max_length=20)
 
     def __init__(self, *args, **kwargs):
         """
         Cambiar orden de los campos y personalizar Comprador
         """
         super(PedidoForm, self).__init__(*args, **kwargs)
-        self.fields.keyOrder = ['comprador','custom', 'productos','subtotal','envio','total']
+        self.fields.keyOrder = ['comprador','custom', 'productos','subtotal','envio','total','pub_date','shipping_text']
  
     def __get_userid(self,user):
         # TODO: Something more efficient?
@@ -84,6 +86,8 @@ class ProPedidoForm(PedidoForm):
             form.subtotal = self.cleaned_data['subtotal']
             form.envio = self.cleaned_data['envio']
             form.total = self.cleaned_data['total']
+            form.pub_date = self.cleaned_data['pub_date']
+            form.shipping_text = self.cleaned_data['shipping_text']
 
             if commit:
                 form.save()

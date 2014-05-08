@@ -154,6 +154,18 @@ def getProductByColor(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+"""
+2014-05-08 04:59:04
+"""
+
+import datetime
+import time
+
+
+def date(unixtime, format = '%d/%m/%Y %H:%M:%S'):
+    d = datetime.datetime.fromtimestamp(unixtime)
+    return d.strftime(format)
+
 
 # Cesta de pago
 def basket(request,step = False):
@@ -195,6 +207,9 @@ def basket(request,step = False):
                 request.POST["subtotal"] = subtotal
                 request.POST["envio"] = 150
                 request.POST["total"] = total
+                request.POST['shipping_text'] = 'Pendiente'
+                request.POST['pub_date'] = date(time.time())
+                
                 formula = ProPedidoForm(request.POST)
                 if formula.is_valid():
                     formula.save()
@@ -230,6 +245,7 @@ def basket(request,step = False):
                 #request.POST['comprador'] = user.id
                 request.POST['fac_pais'] = 'Mexico'
                 request.POST['envio_pais'] = 'Mexico'
+                request.POST['shipping_text'] = 'Pendiente'
         
                 formula = AddressPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
@@ -264,6 +280,7 @@ def basket(request,step = False):
                 request.POST['payment_uri'] = 'uri://tpv'
                 request.POST['shipping_id'] = 'IDDEELENVIO'
                 request.POST['shipping_uri'] = 'uri://shipping'
+                request.POST['shipping_text'] = 'Pendiente'
         
                 formula = PaymentPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():

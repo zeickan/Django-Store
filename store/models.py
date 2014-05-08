@@ -107,6 +107,7 @@ class Producto(models.Model):
 
 class Pedido(models.Model):
     comprador = models.CharField(blank=False,max_length=150)
+    pub_date = models.DateTimeField('date published',null=True,blank=True)
     productos = models.ManyToManyField(Producto,blank=True,null=True)
     paid = models.BooleanField(blank=False,default=False)
     custom = models.CharField(blank=True,null=True,max_length=150)
