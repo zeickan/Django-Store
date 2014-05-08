@@ -355,20 +355,20 @@ def basket(request,step = False):
 
                     response = charge.payment_method
 
-                    bar = {}
-
-                    bar['custom'] = customcode
-                    bar['payment'] = pedido.payment
-                    bar['payment_id'] = response['barcode']
-                    bar['payment_uri'] = response['barcode_url']
-                    bar['payment_text'] = response['expiry_date']
-                    bar['payment_info'] = json.dumps(response)
-                    bar['shipping_id'] = '00000'
-                    bar['shipping_uri'] = 'uri://'
+                    pedido.payment_id = response['barcode']
+                    pedido.payment_uri = response['barcode_url']
+                    pedido.payment_text = response['expiry_date']
+                    pedido.payment_info = json.dumps(response)
+                    pedido.shipping_id = '00000'
+                    pedido.shipping_uri = 'uri://'
+                    pedido.save()
             
-                    update = PaymentPedidoForm(bar,instance=pedido)
+                    """
+                    update = PaymentPedidoForm(instance=pedido)
                     if update.is_valid():
                         update.save()
+                        return HttpResponseRedirect('/store/checkout/customer/?custom='+customcode)
+                    """
 
                 else :
 
