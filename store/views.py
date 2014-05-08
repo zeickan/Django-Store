@@ -443,12 +443,41 @@ def register(request):
             form = ExtendedUserCreationForm(request.POST)
             if form.is_valid():
                 new_user = form.save()
+                #send email 
+                notify_email()
                 return HttpResponseRedirect("/accounts/profile/registerSuccess")
         else:
             form = ExtendedUserCreationForm()
 
         return render(request, "registration/register.html", { 'form': form, })
 
+"""
+Put in settings.py
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contacto@redcarpetmanicure.com.mx'
+EMAIL_HOST_PASSWORD = 'R3dC4Rp3To='
+DEFAULT_FROM_EMAIL = 'contacto@redcarpetmanicure.com.mx'
+DEFAULT_TO_EMAIL = 'zeickan@gmail.com'
+
+"""
+
+from django.conf import settings
+from django.core.mail import send_mail
+
+
+def notify_email():
+
+    mail_title = 'Gracias por registrarte'
+    message = 'Gracias por registrarte en Red Carpet Manicure' 
+    email = settings.DEFAULT_FROM_EMAIL
+    recipients = [settings.DEFAULT_TO_EMAIL]
+    
+    send = send_mail(mail_title, message, settings.EMAIL_HOST_USER, ['zeickan@gmail.com'], fail_silently=False)
+
+    return send
 
 
 
