@@ -120,15 +120,23 @@ def conektaio(request):
 
 	    		pedido.paid=True
 	    		pedido.save()
+
+	    	numero = 200
 	    	
         else:
 
+        	debug = Debug.objects.create(name="Ringo Starr")
+        	debug.save()
+
         	dato = { "status":"error" }
+
+        	numero = 400
 
     else:
     	dato = { "status":"error" }
+    	numero = 400
 
-    return HttpResponse(dato['status'],content_type="application/json")
+    return HttpResponse(dato['status'],content_type="application/json",status=numero)
 
 
 
