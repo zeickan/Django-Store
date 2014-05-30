@@ -125,12 +125,12 @@ def conektaio(request):
 	    	
         else:
 
-        	debug = Debug.objects.create(name="Ringo Starr")
+        	debug = Debug.objects.create(texto=data)
         	debug.save()
 
-        	dato = { "status":"error" }
+        	dato = { "status":"ergo" }
 
-        	numero = 400
+        	numero = 200
 
     else:
     	dato = { "status":"error" }
