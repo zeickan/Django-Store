@@ -100,7 +100,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def conektaio(request):
-
+    
     try:
     	data = json.loads(request.body)
     except:
@@ -137,9 +137,6 @@ def conektaio(request):
     	numero = 400
 
     return HttpResponse(dato['status'],content_type="application/json",status=numero)
-
-
-
 
 
 

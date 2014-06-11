@@ -7134,3 +7134,14 @@ header {
   .docs.subheader {
     margin-top: 38px;
     float: right; } }
+
+
+
+@media (max-width: 767px) {
+
+
+    .top-bar-section ul li.divider {
+    	display: none;
+    }
+
+}
