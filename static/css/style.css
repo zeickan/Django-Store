@@ -347,11 +347,7 @@ input, select, textarea {
 }
 
 .slidefull .footer {
-	position: absolute;
-	z-index: 9999;
-	bottom: 0px;
-	right: 0px;
-	width: 100%;
+	
 }
 
 .sidebar {
