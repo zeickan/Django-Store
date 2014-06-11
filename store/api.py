@@ -5,6 +5,9 @@ from django.http import HttpResponse, HttpRequest, QueryDict, HttpResponseRedire
 import json
 import conekta
 
+from store.models import *
+from store.forms import *
+
 
 ### PETICIONES API PARA EL CARRITO
 
@@ -93,36 +96,51 @@ def setBasket(request):
 
 import pprint
 
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def conektaio(request):
 
-    conekta.api_key = 'key_hq25ksDD9j3Gyag4'
+    try:
+    	data = json.loads(request.body)
+    except:
+    	data = False
 
-    data = {
-        "description": "Pedido # 123",
-        "amount": 25050,
-        "currency": "MXN",
-        "reference_id": "red_3215_0001",
-        "cash": {
-            "type": "oxxo"
-        },
-        "details": {
-            "name": "Wolverine",
-            "email": "logan.thomas@xmen.org",
-            "phone": "403-342-0642"
-        }
-    }
+    if data:
+
+    	try:
+    		pedido = Pedido.objects.get(custom=data['data']['object']['reference_id'])
+    	except:
+    		pedido = False
+
+    	if pedido:	
+	    	dato = { "status": "success" ,"id": pedido.id, "nombre":pedido.payment }
+
+	    	if data['data']['object']['status'] == "paid":
+
+	    		pedido.paid=True
+	    		pedido.save()
+
+	    	numero = 200
+	    	
+        else:
+
+        	debug = Debug.objects.create(texto=data)
+        	debug.save()
+
+        	dato = { "status":"ergo" }
+
+        	numero = 200
+
+    else:
+    	dato = { "status":"error" }
+    	numero = 400
+
+    return HttpResponse(dato['status'],content_type="application/json",status=numero)
 
 
-    charge = conekta.Charge.create(data)
 
 
-    response = charge.payment_method['barcode_url']
-
-
-
-
-    return HttpResponse(response,content_type="application/json")
 
 
 
