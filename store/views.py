@@ -331,7 +331,7 @@ def basket(request,step = False):
 
                 if pedido.payment_info == "":
 
-                    conekta.api_key = 'key_jxAf3ExGqrL6yrsv'
+                    conekta.api_key = 'key_vX6y75AAxqTdKsSG'
 
                     total = pedido.total
 
