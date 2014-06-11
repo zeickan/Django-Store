@@ -147,6 +147,9 @@ class Pedido(models.Model):
     def __unicode__(self):
         return "%s" % self.comprador
 
+class Debug(models.Model):
+	texto = models.TextField(blank=True,null=True)
+	valor = models.CharField(blank=True,null=True,max_length=200)
 
 
 
