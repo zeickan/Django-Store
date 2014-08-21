@@ -336,6 +336,23 @@ input, select, textarea {
 	color:#FFF;
 }
 
+.slidefull .top-nav {
+	display: block;
+	width:100%;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 9999;
+	height: 90px !important;
+}
+
+.slidefull .footer {
+	position: absolute;
+	z-index: 9999;
+	bottom: 0px;
+	right: 0px;
+	width: 100%;
+}
 
 .sidebar {
 	font: normal 700 17px / 17px "source_sans_probold",helvetica,sans-serif;

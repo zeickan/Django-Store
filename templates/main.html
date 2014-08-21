@@ -1,12 +1,48 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block indexClass %}fondo {% endblock %}
-{% block content %}
-{% endblock %}
+{% block indexClass %}slidefull {% endblock %}
+{% block css %}<link rel="stylesheet" href="/static/css/superslides.css">{% endblock %}
+{% block content %}{% endblock %}
 
-{% block indexFoot %}gun{% endblock %}
-{% block footIndex %}
-         <div class="content">
-        <img src="{% static "img/mark1.png" %}" class="mark1">
+{% block slide %}
+<div id="slides">
+    <div class="slides-container">
+      <img src="/static/images/background.jpg" alt="">
+      <img src="/static/images/slide2.jpg" alt="Cinelli">
+      <img src="/static/images/slide3.jpg" alt="Surlyqwe">
+      <img src="/static/images/slide4.jpg" alt="Surlys">
+    </div>
+
+    <nav class="slides-navigation">
+      <a href="#" class="next">Next</a>
+      <a href="#" class="prev">Previous</a>
+    </nav>
+  </div>
+{% endblock %}  
+{% block js %}
+
+  <script src="/static/js/jquery.easing.1.3.js"></script>
+  <script src="/static/js/jquery.animate-enhanced.min.js"></script>
+  <script src="/static/js/jquery.superslides.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $(function() {
+      $('#slides').superslides({
+        hashchange: true,
+        play: 2000
+      });
+
+      $('#slides').on('mouseenter', function() {
+        $(this).superslides('stop');
+        console.log('Stopped')
+      });
+      $('#slides').on('mouseleave', function() {
+        $(this).superslides('start');
+        console.log('Started')
+      });
+    });
+    
+  </script>
 {% endblock %}
+{% block indexFoot %}{% endblock %}
+{% block footIndex %}{% endblock %}
 {% block indexDiv %}</div>{% endblock %}

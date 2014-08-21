@@ -9,6 +9,7 @@
 	
 	<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
 	
+
     <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
     <link rel="stylesheet" href="{% static "css/docs.css" %}" />
     <script src="{% static "js/custom.modernizr.js" %}"></script>
@@ -16,6 +17,8 @@
     <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "fonts/stylesheet.css" %}">
+
+    {% block css %}{% endblock %}
 
     <link rel="stylesheet" href="{% static "css/print.css" %}" media="print">
 		
@@ -92,6 +95,7 @@
 
 <!-- End Navigation -->
 
+{% block slide %}{% endblock %}
 
 <div class="whiteBlock">
 {% block content %}{% endblock %}
@@ -136,18 +140,15 @@
 </div>
 
 
-
-
+<script src="{% static "js/vendor/zepto.js" %}"></script>
+<script src="{% static "js/vendor/jquery.js" %}"></script>
+<script src="{% static "js/docs.js" %}"></script>
 <script>
-
-	document.write('<script src="{{ BASE_URL }}/static/js/vendor/'
-	  + ('__proto__' in {} ? 'zepto' : 'jquery')
-	  + '.js"><\/script>');
-	
 	var jsonPath = "{{ BASE_URL }}/api/";
 </script>
 <script src="{% static "js/docs.js" %}"></script>
 <script src="{% static "js/script.js" %}"></script>
+{% block js %}{% endblock %}
 {% block debug %}{% endblock %}
 </body>
 </html>
